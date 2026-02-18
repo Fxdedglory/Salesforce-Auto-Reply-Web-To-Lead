@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Lead_Auto_Response_TeeEmails</fullName>
+        <description>Lead Auto Response - TeeEmails</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>tim@teemails.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Leads/Web_to_lead_Auto_Response_v5_1771283904635</template>
+    </alerts>
+</Workflow>

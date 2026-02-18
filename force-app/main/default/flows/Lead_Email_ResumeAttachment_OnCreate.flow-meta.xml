@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+
+    <description>v1 | 2026-02-17 - Lead After-Save (Create): Send EmailTemplate + attach Resume PDF from Files using Apex invocable LeadResumeEmailAction. Debug: STARTED -> CALLING_EMAIL -> EMAIL_SENT or EMAIL_FAULT.</description>
+    <environments>Default</environments>
+    <interviewLabel>Lead Resume Email {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Lead Email - Resume Attachment (On Create)</label>
+    <processType>AutoLaunchedFlow</processType>
+    <status>Active</status>
+
+    <!-- =========================
+         FORMULA: Debug Line
+         ========================= -->
+    <formulas>
+        <name>f_DebugLine</name>
+        <dataType>String</dataType>
+        <expression>{!var_DebugStatus}
+&amp; " | LeadId=" &amp; {!$Record.Id}
+&amp; IF(ISBLANK({!var_DebugError}), "", " | ERROR=" &amp; {!var_DebugError})</expression>
+    </formulas>
+
+    <!-- =========================
+         VARIABLES
+         ========================= -->
+    <variables>
+        <name>var_DebugStatus</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <variables>
+        <name>var_DebugError</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <!-- ==========================================================
+         ASSIGNMENTS (MUST BE CONTIGUOUS)
+         ========================================================== -->
+    <assignments>
+        <name>Assign_Init</name>
+        <label>Debug - Init</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_DebugStatus</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>STARTED</stringValue></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugError</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue></stringValue></value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Debug_Started</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Assign_Email_Sending</name>
+        <label>Debug - Email Sending</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_DebugStatus</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>CALLING_EMAIL</stringValue></value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Debug_Before_Send</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Assign_Email_Sent</name>
+        <label>Debug - Email Sent</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_DebugStatus</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>EMAIL_SENT</stringValue></value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Debug_Final</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Assign_Email_Fault</name>
+        <label>Debug - Email Fault</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>var_DebugStatus</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>EMAIL_FAULT</stringValue></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugError</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>$Flow.FaultMessage</elementReference></value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Debug_Final</targetReference>
+        </connector>
+    </assignments>
+
+    <!-- =========================
+         RECORD UPDATES (debug)
+         ========================= -->
+    <recordUpdates>
+        <name>Update_Debug_Started</name>
+        <label>Debug - Write (Started)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value><elementReference>f_DebugLine</elementReference></value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+        <connector>
+            <targetReference>Assign_Email_Sending</targetReference>
+        </connector>
+    </recordUpdates>
+
+    <recordUpdates>
+        <name>Update_Debug_Before_Send</name>
+        <label>Debug - Write (Before Send)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value><elementReference>f_DebugLine</elementReference></value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+        <connector>
+            <targetReference>Send_Resume_Email_1</targetReference>
+        </connector>
+    </recordUpdates>
+
+    <recordUpdates>
+        <name>Update_Debug_Final</name>
+        <label>Debug - Write (Final)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value><elementReference>f_DebugLine</elementReference></value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+
+    <!-- =========================
+         ACTION: Apex Invocable
+         ========================= -->
+    <actionCalls>
+        <name>Send_Resume_Email_1</name>
+        <label>Send Resume Email (Template + PDF)</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+
+        <!-- IMPORTANT:
+             This is the Apex invocable action. If your org expects a different actionName token,
+             retrieve the flow once created in UI and copy the actionName/nameSegment values.
+        -->
+        <actionName>LeadResumeEmailAction</actionName>
+        <actionType>apex</actionType>
+
+        <inputParameters>
+            <name>leadId</name>
+            <value><elementReference>$Record.Id</elementReference></value>
+        </inputParameters>
+
+        <inputParameters>
+            <name>emailTemplateId</name>
+            <value><stringValue>00XgK00000HjyUWUAZ</stringValue></value>
+        </inputParameters>
+
+        <inputParameters>
+            <name>orgWideFromAddress</name>
+            <value><stringValue>tim@teemails.com</stringValue></value>
+        </inputParameters>
+
+        <inputParameters>
+            <name>contentDocumentId</name>
+            <value><stringValue>069gK000007dNdRQAU</stringValue></value>
+        </inputParameters>
+
+        <connector>
+            <targetReference>Assign_Email_Sent</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Assign_Email_Fault</targetReference>
+        </faultConnector>
+
+        <nameSegment>LeadResumeEmailAction</nameSegment>
+        <offset>0</offset>
+    </actionCalls>
+
+    <!-- =========================
+         START (Record-Triggered)
+         ========================= -->
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Init</targetReference>
+        </connector>
+
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Email</field>
+            <operator>IsNull</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <filters>
+            <field>LeadSource</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>Web</stringValue></value>
+        </filters>
+
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value><stringValue>AUTO_LAYOUT_CANVAS</stringValue></value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+</Flow>

@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- v0.1.1 | 2026-02-17 -->
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <label>Lead - DocuSign Send Email and Envelope</label>
+    <processType>RecordTriggeredFlow</processType>
+    <status>Draft</status>
+
+    <start>
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>AfterSave</triggerType>
+
+        <filters>
+            <field>Email</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DocuSign_Email_Sent__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filterLogic>and</filterLogic>
+    </start>
+
+    <variables>
+        <name>vSubject</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <variables>
+        <name>vBody</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <recordLookups>
+        <name>Get_Active_Asset</name>
+        <label>Get Active DocuSign Asset</label>
+        <locationX>200</locationX>
+        <locationY>140</locationY>
+        <object>Docusign_Template_Asset__c</object>
+        <filters>
+            <field>Active__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <connector>
+            <targetReference>Assign_Email_Content</targetReference>
+        </connector>
+    </recordLookups>
+
+    <assignments>
+        <name>Assign_Email_Content</name>
+        <label>Assign Email Subject and Body</label>
+        <locationX>200</locationX>
+        <locationY>240</locationY>
+        <assignmentItems>
+            <assignToReference>vSubject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Documents for your DocuSign Signature</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vBody</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Hi,
+
+This email is to notify you that you are now in my demo-CRM as a lead.
+
+Attached are documents for your electronic signature. Please review and sign.
+
+Thanks,
+Tim</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Apex_Send_Email</targetReference>
+        </connector>
+    </assignments>
+
+    <actionCalls>
+        <name>Apex_Send_Email</name>
+        <label>Send Email With Attachments</label>
+        <locationX>200</locationX>
+        <locationY>340</locationY>
+        <actionName>SendEmailWithFileAttachments</actionName>
+        <actionType>Apex</actionType>
+
+        <inputParameters>
+            <name>requests</name>
+            <value>
+                <collectionValues>
+                    <values>
+                        <field>leadId</field>
+                        <value>
+                            <elementReference>.Id</elementReference>
+                        </value>
+                    </values>
+                    <values>
+                        <field>subject</field>
+                        <value>
+                            <elementReference>vSubject</elementReference>
+                        </value>
+                    </values>
+                    <values>
+                        <field>bodyPlainText</field>
+                        <value>
+                            <elementReference>vBody</elementReference>
+                        </value>
+                    </values>
+                    <values>
+                        <field>contentDocumentId1</field>
+                        <value>
+                            <elementReference>Get_Active_Asset.ResumeContentDocumentId__c</elementReference>
+                        </value>
+                    </values>
+                    <values>
+                        <field>contentDocumentId2</field>
+                        <value>
+                            <elementReference>Get_Active_Asset.StampedApprovalContentDocumentId__c</elementReference>
+                        </value>
+                    </values>
+                </collectionValues>
+            </value>
+        </inputParameters>
+
+        <connector>
+            <targetReference>DOCUSIGN_ACTION_PLACEHOLDER</targetReference>
+        </connector>
+    </actionCalls>
+
+    <!-- DocuSign action placeholder (replace with retrieved actionCalls from a real DocuSign flow) -->
+    <actionCalls>
+        <name>DOCUSIGN_ACTION_PLACEHOLDER</name>
+        <label>DocuSign - Send Envelope (REPLACE ME)</label>
+        <locationX>200</locationX>
+        <locationY>440</locationY>
+        <actionName>REPLACE_WITH_REAL_DOCUSIGN_ACTION_NAME</actionName>
+        <actionType>CustomAction</actionType>
+        <connector>
+            <targetReference>Update_Lead_Sent_Flag</targetReference>
+        </connector>
+    </actionCalls>
+
+    <recordUpdates>
+        <name>Update_Lead_Sent_Flag</name>
+        <label>Set Lead DocuSign_Email_Sent__c</label>
+        <locationX>200</locationX>
+        <locationY>540</locationY>
+        <inputReference></inputReference>
+        <fieldAssignments>
+            <field>DocuSign_Email_Sent__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </fieldAssignments>
+    </recordUpdates>
+
+    <connector>
+        <sourceReference>.Start</sourceReference>
+        <targetReference>Get_Active_Asset</targetReference>
+    </connector>
+</Flow>

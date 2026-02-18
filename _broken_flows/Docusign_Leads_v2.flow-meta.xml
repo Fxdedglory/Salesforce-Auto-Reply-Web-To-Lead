@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+FLOW: Docusign Leads v2
+
+MILESTONES / CHECKPOINTS (iterative testing):
+  M1: Flow triggers on Lead Created (LeadSource=Web AND Email not null)
+  M2: Auto-reply email alert fires (from Org-Wide Address)
+  M3: Envelope config lookup succeeds (Id exists)
+  M4: DocuSign action called with non-null envelopeConfigurationId + sourceId
+  M5: DocuSign envelope record appears + DocuSign sends its own email
+
+DEBUG STRATEGY:
+  - Writes stage + faults into Lead.Description (no custom fields required)
+  - Stages: STARTED -> EMAIL_SENDING -> EMAIL_SENT -> CONFIG_FOUND -> DOCUSIGN_CALLING -> DOCUSIGN_SENT
+  - Fault stages: EMAIL_FAULT / DOCUSIGN_FAULT with $Flow.FaultMessage
+
+LESSONS LEARNED LOG (to avoid repeating schema mistakes):
+  - Record-triggered flows: DO NOT use <startConnector>. Put <connector> inside <start>.
+  - FlowRecordUpdate uses <inputAssignments>, NOT <fieldAssignments>.
+  - Do NOT duplicate top-level tags (<start>, <status>, <variables>).
+  - Avoid custom connector types like <recordLookupConnector>; use <connector> inside the node.
+  - Keep element structure simple; validate with deploy errors iteratively.
+
+DEPLOY:
+  sf project deploy start metadata Flow:Docusign_Leads_v2
+-->
+
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <label>Docusign Leads v2</label>
+    <description>Lead created -> send Salesforce auto-reply + send DocuSign envelope (resume stamp). Heavy debug writes to Lead.Description.</description>
+    <interviewLabel>Docusign Leads v2 {!$Flow.CurrentDateTime}</interviewLabel>
+
+    <processType>AutoLaunchedFlow</processType>
+    <status>Active</status>
+
+    <!-- =========================
+         START: Lead Created (After Save)
+         IMPORTANT: Use <connector> inside <start> (no <startConnector>)
+         ========================= -->
+    <start>
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+
+        <!-- Entry Criteria: Email is not null AND LeadSource = Web -->
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Email</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>LeadSource</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Web</stringValue>
+            </value>
+        </filters>
+
+        <connector>
+            <targetReference>Assign_Started</targetReference>
+        </connector>
+    </start>
+
+    <!-- =========================
+         VARIABLES (Debug)
+         ========================= -->
+    <variables>
+        <name>var_DebugStage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+    </variables>
+
+    <variables>
+        <name>var_DebugError</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+    </variables>
+
+    <variables>
+        <name>var_DebugNote</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+    </variables>
+
+    <!-- =========================
+         DOCUSIGN ENVELOPE CONFIG LOOKUP (by Id)
+         dfsle__EnvelopeConfiguration__c Id = a0DgK00000K0W9FUAV
+         ========================= -->
+    <recordLookups>
+        <name>Get_Envelope_Config_DocuSign_Custom</name>
+        <label>Get Envelope Config - DocuSign Custom</label>
+        <object>dfsle__EnvelopeConfiguration__c</object>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>a0DgK00000K0W9FUAV</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+        <connector>
+            <targetReference>Decision_Config_Found</targetReference>
+        </connector>
+    </recordLookups>
+
+    <!-- =========================
+         ASSIGN: STARTED
+         ========================= -->
+    <assignments>
+        <name>Assign_Started</name>
+        <label>Debug - Started</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>STARTED</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugError</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>M1: Triggered by Lead Created</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug</targetReference>
+        </connector>
+    </assignments>
+
+    <!-- =========================
+         UPDATE: Write Debug to Lead.Description
+         ========================= -->
+    <recordUpdates>
+        <name>Update_Lead_Debug</name>
+        <label>Debug - Update Lead Description</label>
+        <inputReference>$Record</inputReference>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>FLOW_STAGE={!var_DebugStage} | NOTE={!var_DebugNote} | ERR={!var_DebugError}</stringValue>
+            </value>
+        </inputAssignments>
+        <connector>
+            <targetReference>Assign_Email_Sending</targetReference>
+        </connector>
+    </recordUpdates>
+
+    <!-- =========================
+         ASSIGN: EMAIL_SENDING
+         ========================= -->
+    <assignments>
+        <name>Assign_Email_Sending</name>
+        <label>Debug - Email Sending</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>EMAIL_SENDING</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>M2: Calling Email Alert (auto-reply)</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_EmailSending</targetReference>
+        </connector>
+    </assignments>
+
+    <recordUpdates>
+        <name>Update_Lead_Debug_EmailSending</name>
+        <label>Debug - Write Email Sending</label>
+        <inputReference>$Record</inputReference>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>FLOW_STAGE={!var_DebugStage} | NOTE={!var_DebugNote} | ERR={!var_DebugError}</stringValue>
+            </value>
+        </inputAssignments>
+        <connector>
+            <targetReference>Action_Email_Alert_AutoReply</targetReference>
+        </connector>
+    </recordUpdates>
+
+    <!-- =========================
+         ACTION: Email Alert (Auto Reply)
+         actionName MUST match Email Alert Unique Name (API Name)
+         ========================= -->
+    <actionCalls>
+        <name>Action_Email_Alert_AutoReply</name>
+        <label>Send Auto-Reply (Email Alert)</label>
+        <actionType>emailAlert</actionType>
+        <actionName>Lead_Auto_Response_TeeEmails</actionName>
+
+        <connector>
+            <targetReference>Assign_Email_Sent</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Assign_Email_Fault</targetReference>
+        </faultConnector>
+    </actionCalls>
+
+    <assignments>
+        <name>Assign_Email_Sent</name>
+        <label>Debug - Email Sent</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>EMAIL_SENT</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>M2: Email Alert invoked successfully</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_EmailSent</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Assign_Email_Fault</name>
+        <label>Debug - Email Fault</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>EMAIL_FAULT</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugError</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!$Flow.FaultMessage}</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Email Alert faulted</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_Terminal</targetReference>
+        </connector>
+    </assignments>
+
+    <recordUpdates>
+        <name>Update_Lead_Debug_EmailSent</name>
+        <label>Debug - Write Email Sent</label>
+        <inputReference>$Record</inputReference>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>FLOW_STAGE={!var_DebugStage} | NOTE={!var_DebugNote} | ERR={!var_DebugError}</stringValue>
+            </value>
+        </inputAssignments>
+        <connector>
+            <targetReference>Get_Envelope_Config_DocuSign_Custom</targetReference>
+        </connector>
+    </recordUpdates>
+
+    <!-- =========================
+         DECISION: Config Found?
+         ========================= -->
+    <decisions>
+        <name>Decision_Config_Found</name>
+        <label>DocuSign Config Found?</label>
+        <defaultConnector>
+            <targetReference>Assign_Config_Missing</targetReference>
+        </defaultConnector>
+        <rules>
+            <name>Rule_Config_Found</name>
+            <label>Found</label>
+            <conditions>
+                <leftValueReference>Get_Envelope_Config_DocuSign_Custom.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Config_Found</targetReference>
+            </connector>
+        </rules>
+    </decisions>
+
+    <assignments>
+        <name>Assign_Config_Found</name>
+        <label>Debug - Config Found</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>CONFIG_FOUND</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>M3: Envelope config found, preparing DocuSign call</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_ConfigFound</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Assign_Config_Missing</name>
+        <label>Debug - Config Missing</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>CONFIG_MISSING</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugError</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>No dfsle__EnvelopeConfiguration__c found for configured Id</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>M3 FAILED: Config lookup returned null</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_Terminal</targetReference>
+        </connector>
+    </assignments>
+
+    <recordUpdates>
+        <name>Update_Lead_Debug_ConfigFound</name>
+        <label>Debug - Write Config Found</label>
+        <inputReference>$Record</inputReference>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>FLOW_STAGE={!var_DebugStage} | NOTE={!var_DebugNote} | ERR={!var_DebugError}</stringValue>
+            </value>
+        </inputAssignments>
+        <connector>
+            <targetReference>Assign_DocuSign_Calling</targetReference>
+        </connector>
+    </recordUpdates>
+
+    <!-- =========================
+         ASSIGN: DOCUSIGN_CALLING
+         ========================= -->
+    <assignments>
+        <name>Assign_DocuSign_Calling</name>
+        <label>Debug - Calling DocuSign</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>DOCUSIGN_CALLING</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>M4: Invoking Send With DocuSign</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_DocuSignCalling</targetReference>
+        </connector>
+    </assignments>
+
+    <recordUpdates>
+        <name>Update_Lead_Debug_DocuSignCalling</name>
+        <label>Debug - Write DocuSign Calling</label>
+        <inputReference>$Record</inputReference>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>FLOW_STAGE={!var_DebugStage} | NOTE={!var_DebugNote} | ERR={!var_DebugError}</stringValue>
+            </value>
+        </inputAssignments>
+        <connector>
+            <targetReference>Action_Send_With_DocuSign</targetReference>
+        </connector>
+    </recordUpdates>
+
+    <!-- =========================
+         ACTION: Send With DocuSign (Apex)
+         ========================= -->
+    <actionCalls>
+        <name>Action_Send_With_DocuSign</name>
+        <label>Send Resume Stamp Envelope (DocuSign)</label>
+        <actionType>apex</actionType>
+        <actionName>dfsle__EnvelopeConfigurationBulkRequest</actionName>
+
+        <inputParameters>
+            <name>envelopeConfigurationId</name>
+            <value>
+                <stringValue>{!Get_Envelope_Config_DocuSign_Custom.Id}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sourceId</name>
+            <value>
+                <stringValue>{!$Record.Id}</stringValue>
+            </value>
+        </inputParameters>
+
+        <connector>
+            <targetReference>Assign_DocuSign_Sent</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Assign_DocuSign_Fault</targetReference>
+        </faultConnector>
+    </actionCalls>
+
+    <assignments>
+        <name>Assign_DocuSign_Sent</name>
+        <label>Debug - DocuSign Sent</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>DOCUSIGN_SENT</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>M5: DocuSign action returned success (DocuSign will send email)</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_Terminal</targetReference>
+        </connector>
+    </assignments>
+
+    <assignments>
+        <name>Assign_DocuSign_Fault</name>
+        <label>Debug - DocuSign Fault</label>
+        <assignmentItems>
+            <assignToReference>var_DebugStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>DOCUSIGN_FAULT</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugError</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>{!$Flow.FaultMessage}</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>var_DebugNote</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>DocuSign action faulted - check message</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Lead_Debug_Terminal</targetReference>
+        </connector>
+    </assignments>
+
+    <recordUpdates>
+        <name>Update_Lead_Debug_Terminal</name>
+        <label>Debug - Final Write</label>
+        <inputReference>$Record</inputReference>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>FLOW_STAGE={!var_DebugStage} | NOTE={!var_DebugNote} | ERR={!var_DebugError}</stringValue>
+            </value>
+        </inputAssignments>
+    </recordUpdates>
+
+</Flow>

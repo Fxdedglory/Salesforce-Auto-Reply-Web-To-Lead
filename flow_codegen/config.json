@@ -1,0 +1,5 @@
+﻿{
+  "FLOW_API_NAME": "Lead_Web_DocuSign",
+  "ENVELOPE_CONFIG_NAME": "Lead",
+  "ENTRY_LEADSOURCE": "Web"
+}
