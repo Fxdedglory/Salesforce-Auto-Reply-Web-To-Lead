@@ -1,434 +1,392 @@
 ````md
-# Salesforce Auto Reply Web-to-Lead (Resume Attachment + Lead Notification)
+# Salesforce Automation Runbook
 
-This project implements a **reusable, template-driven** Salesforce automation system you can use to blast high-quality outbound email alerts to new Leads (or any Lead dataset) with **consistent testing + debugging**.
+## Overview
 
-It supports:
+This project implements a **template-driven, reusable** automation system for
+Salesforce Leads. When a Lead is created (for example from a Web-to-Lead
+form), a record-triggered Flow sends a templated email to the new Lead with a
+PDF attachment and optionally notifies internal users. A PowerShell test
+script provides deterministic end-to-end validation and writes debug
+information to the Lead record so you can rapidly diagnose issues without
+manually inspecting logs.
 
-1) **Auto-sends a templated email to new Leads** (e.g., `LeadSource=Web`)
-2) **Attaches a PDF from Salesforce Files** (by `ContentDocumentId`)
-3) **Optional internal notification** when a new Lead is created (email to you)
-4) A **single-command test runner**: `test_lead_flow.ps1`
+The primary design goals are:
 
-**Primary goal:** reuse the same Apex + Flow pattern to add **lots of email templates**, **lots of variants**, and iterate quickly while keeping the system stable and easy to debug.
+- **Reusability** – one Apex action and one Flow pattern can drive many
+  campaigns by swapping template IDs and attachment IDs. You do **not** need
+  to change Apex code when you add more email campaigns.
+- **Maintainability** – email content lives in Salesforce Email Templates,
+  flows are declarative, and all IDs and settings are passed into the Apex
+  action. This keeps the codebase small and easy to audit.
+- **Debuggability** – the system surfaces its progress directly on the Lead
+  record (`Lead.Description`) with predictable status tokens (see
+  [Debugging & Test Workflow](#debugging--test-workflow)). A single test
+  script exercises the entire pipeline and prints the debug field back to the
+  console.
+
+Use this runbook to understand, operate, and extend the system. It documents
+how the components fit together, how to configure your org, how to add new
+campaigns, and how to troubleshoot common problems.
 
 ---
 
-## Quick Start (Run the Whole System)
+## Quick Start
 
-From the project root:
+These steps run the entire pipeline and verify that a Lead triggers the
+automation.
 
-```powershell
-cd E:\Salesforce
-.\test_lead_flow.ps1
+1. Open a terminal in the project root.
+2. Navigate to your local Salesforce project directory (for example
+   `E:\Salesforce`). The runbook assumes PowerShell on Windows but you can
+   adapt the commands for other shells.
+
+   ```powershell
+   cd E:\Salesforce
 ````
 
-Expected:
+3. Execute the test runner script. It will create a test Lead in your
+   authenticated org, wait for the Flow and Apex action to run, and then
+   query back the Lead to print its debug status.
 
-* Lead record is created
-* `Lead.Description` shows a debug status (example: `EMAIL_SENT | LeadId=...`)
-* Recipient receives the email **with the resume PDF attached**
-* (Optional) you receive a separate internal notification email when the Lead is created
+   ```powershell
+   .\test_lead_flow.ps1
+   ```
 
----
+4. Expected outcomes:
 
-## What This Repo Does
+   * A new Lead record is created.
+   * `Lead.Description` contains a status value (e.g. `EMAIL_SENT | LeadId=...`).
+   * The Lead receives an email that uses the specified template and includes
+     the attached PDF file.
+   * If you enabled internal notification, the configured internal user
+     receives an alert email with Lead details.
 
-### When a Lead is created (Web-to-Lead)
-
-* A record-triggered Flow runs on Lead **After Create**
-* It calls an Apex Invocable Action that:
-
-  * sends a Salesforce Email Template to the Lead
-  * uses an Org-Wide “From” address
-  * attaches the **latest** version of a File stored in Salesforce Files (ContentVersion) by `ContentDocumentId`
-  * sends the email via `Messaging.sendEmail()`
-
-### You also (optionally) receive a notification email
-
-* A Flow “Send Email” node can send an internal alert to `sellwood.timm@gmail.com`
-* The body includes Lead details (name/email/company/source/time/id)
+If any of these outcomes fail, use the debug status and the
+[Troubleshooting](#troubleshooting) section to isolate the issue.
 
 ---
 
-## Core Design Principles (Reusability + Maintainability)
+## Architecture Overview
 
-### 1) Template-driven system
+### Flow & Apex Interaction
 
-* Email content lives in Salesforce **Email Templates**
-* You can add dozens of templates for different campaigns:
+When a Lead is inserted, a record-triggered Flow (`After Save`) runs. The
+Flow calls an Apex **Invocable Action** named
+`LeadResumeEmailAction`. This action accepts several inputs:
 
-  * “Resume + Calendly”
-  * “Portfolio Outreach”
-  * “Recruiter Follow-up”
-  * “Event Attendee Follow-up”
-  * “Cold Outreach Variant A/B/C”
-* Each campaign/variant = a new EmailTemplate + (optionally) a new Flow that points at it.
+| Input                | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| `leadId`             | The Id of the Lead being processed.               |
+| `emailTemplateId`    | Id of the Email Template to send (00X…).          |
+| `orgWideFromAddress` | Email address from your Org-Wide Email Addresses. |
+| `contentDocumentId`  | Id of the File to attach (069…).                  |
 
-### 2) One Apex action reused everywhere
+The Apex action performs the following steps:
 
-`LeadResumeEmailAction` is deliberately generic:
+1. Query the latest `ContentVersion` for the supplied `ContentDocumentId`.
+2. Convert the file’s binary into a `Messaging.EmailFileAttachment`.
+3. Send an email using `Messaging.sendEmail()` with the template and
+   attachment.
+4. Return control back to the Flow.
 
-* Lead recipient
-* Any EmailTemplate (by Id)
-* Any File attachment (by ContentDocumentId)
-* Any Org-Wide “From” address (by email address)
+The Flow also updates `Lead.Description` at multiple points to expose a
+deterministic status. The status values, in order, are:
 
-This means:
+* `STARTED` – Flow has begun processing.
+* `CALLING_EMAIL` – Apex action invocation is about to occur.
+* `EMAIL_SENT` – Apex action successfully sent the email.
+* `EMAIL_FAULT | ERROR=<details>` – An exception occurred during send. The
+  error message is appended after `ERROR=`.
 
-* You do **not** rewrite Apex to create new campaigns
-* You reuse the same, proven “send template + attach file” implementation
+An optional **Send Email** node in the Flow can dispatch an internal
+notification. This sends an alert from an Org-Wide Email Address to a
+configured recipient (no personal addresses are stored in code; set this
+value in the Flow builder).
 
-### 3) Single-command test + predictable debug signals
+### File & Template Reuse
 
-* One script: `test_lead_flow.ps1`
-* One debug surface: `Lead.Description`
-
-You can test rapidly, and if something breaks you immediately see:
-
-* `STARTED`
-* `CALLING_EMAIL`
-* `EMAIL_SENT`
-* `EMAIL_FAULT | ERROR=...`
-
-This makes it safe to add lots of templates/flows without losing confidence.
-
----
-
-## Architecture (High-Level)
-
-**Active Flow (Primary):** `Lead Email - Resume Attachment (On Create)`
-
-```
-Start (Lead Created, After Save)
-↓
-Assign_Init (Debug STARTED)
-↓
-Update_Debug_Started (writes to Lead.Description)
-↓
-Assign_Email_Sending (Debug CALLING_EMAIL)
-↓
-Update_Debug_Before_Send
-↓
-Send_Resume_Email_1  (Apex: LeadResumeEmailAction)
-↓
-Assign_Email_Sent  OR  Assign_Email_Fault
-↓
-Update_Debug_Final
-```
-
-**Apex Invocable Action:** `LeadResumeEmailAction`
-
-* Inputs:
-
-  * `leadId` (Lead Id `00Q…`)
-  * `emailTemplateId` (EmailTemplate Id `00X…`)
-  * `orgWideFromAddress` (e.g., `tim@teemails.com`)
-  * `contentDocumentId` (ContentDocument Id `069…`)
-* Behavior:
-
-  * queries latest `ContentVersion` by `ContentDocumentId`
-  * attaches `VersionData` as a `Messaging.EmailFileAttachment`
-  * sends email with `Messaging.sendEmail()`
+The Apex action is deliberately generic. By passing in the Ids of the
+template, file, and sender, you can reuse the same Flow and Apex code for
+many campaigns. To add a new campaign, you create a new Email Template and
+update the Flow inputs (see
+[Extending the System](#extending-the-system)).
 
 ---
 
-## Repo Layout (Where Things Are)
+## Repository Layout
 
-### Source of truth (what you edit + deploy)
+The repository is organized so that all source of truth lives in the
+`force-app/main/default` directory. Only modify files in this tree and
+deploy them with Salesforce CLI.
 
-* `force-app/main/default/classes/`
+| Directory / File                                                                  | Purpose                                                             |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `force-app/main/default/classes/LeadResumeEmailAction.cls`                        | Apex invocable action used by the Flow.                             |
+| `force-app/main/default/flows/Lead_Email_ResumeAttachment_OnCreate.flow-meta.xml` | Primary Flow that triggers on Lead creation.                        |
+| `force-app/main/default/email/Leads/<Template>.email`                             | HTML body of your Email Template.                                   |
+| `force-app/main/default/email/Leads/<Template>.email-meta.xml`                    | Metadata for the corresponding template.                            |
+| `test_lead_flow.ps1`                                                              | PowerShell script that creates a test Lead and prints debug output. |
 
-  * `LeadResumeEmailAction.cls`
-    Apex invocable action used by Flows to send template + attachment
-* `force-app/main/default/flows/`
-
-  * `Lead_Email_ResumeAttachment_OnCreate.flow-meta.xml`
-    Primary production flow (Lead created → send email with attachment)
-* `force-app/main/default/email/`
-
-  * `Leads/<Template>.email` (HTML body)
-  * `Leads/<Template>.email-meta.xml` (metadata)
-
-### Test automation (your “one command” validation)
-
-* `test_lead_flow.ps1`
-
-  * Creates a test Lead designed to trigger your Flow
-  * Queries the Lead back to show `Description` debug output
-  * This is the **only** script required for end-to-end testing
-
-### Non-source deploy artifacts (should be ignored)
-
-* `mdapi_deploy_*`
-* `*.zip`
-  These are historical packaging artifacts and should not be used as source-of-truth.
+Files such as `mdapi_deploy_*` and `*.zip` are historical deployment
+artifacts and are **not** source of truth; ignore them.
 
 ---
 
-## Prerequisites
+## Prerequisites & Setup
 
-* Salesforce CLI installed (`sf`)
-* Authenticated org set in PowerShell as `$Org` (alias or username)
-* Org-Wide Email Address exists for your sender (example):
+Before running the system, ensure the following:
 
-  * `tim@teemails.com`
+1. **Salesforce CLI** (`sf`) is installed and available in your shell.
+2. You have an authenticated org alias or username stored in a PowerShell
+   variable (e.g. `$Org`). For example, run `sf org login web` or `sf org
+   display` to confirm.
+3. An **Org-Wide Email Address** exists in your org for the sender address you
+   intend to use (e.g. `noreply@yourdomain.com`).
+4. You have created at least one Email Template and uploaded the PDF you
+   intend to attach via Salesforce Files.
 
 ---
 
-## Configuration Values (IDs You’ll Reuse)
+## Configuration Values
 
-You can store these in the Flow inputs (recommended), and optionally mirror them in `test_lead_flow.ps1` to print them during debugging.
+Several Ids must be provided to the Flow and test script. Use the
+Salesforce CLI to find them. The sample queries below assume you have your
+org alias stored in `$Org`.
 
-### 1) EmailTemplate Id (`00X…`)
+### EmailTemplate Id (00X…)
 
-Query:
+Run the following to list your most recently modified Email Templates:
 
 ```powershell
 sf data query -o $Org -q "SELECT Id, Name, DeveloperName, FolderName FROM EmailTemplate ORDER BY LastModifiedDate DESC LIMIT 20"
 ```
 
-### 2) Resume `ContentDocumentId` (`069…`)
+Choose the `Id` for the template you want to send. This value is passed to
+the Flow as `emailTemplateId`.
 
-Query:
+### Resume ContentDocumentId (069…)
+
+To find the file that will be attached, query Salesforce Files (ContentVersion):
 
 ```powershell
-sf data query -o $Org -q "
-SELECT Id, Title, FileType, ContentDocumentId, VersionNumber, CreatedDate
-FROM ContentVersion
-WHERE Title LIKE '%Resume%'
-ORDER BY CreatedDate DESC
-LIMIT 10
-"
+sf data query -o $Org -q "SELECT Id, Title, FileType, ContentDocumentId, VersionNumber, CreatedDate FROM ContentVersion WHERE Title LIKE '%Resume%' ORDER BY CreatedDate DESC LIMIT 10"
 ```
 
-Use the `ContentDocumentId` (069…).
+Use the `ContentDocumentId` value (the field starting with `069`), not the
+`ContentVersion` Id (`068…`). This Id is passed to the Flow as
+`contentDocumentId`.
 
-### 3) Org-Wide Email Address
+### Org-Wide Email Address
 
-Query:
+List your Org-Wide Email Addresses:
 
 ```powershell
 sf data query -o $Org -q "SELECT Id, Address, DisplayName, IsAllowAllProfiles FROM OrgWideEmailAddress ORDER BY Address"
 ```
 
----
-
-## How to Modify Email Wording (Template Editing)
-
-You have two options:
-
-### Option A — Modify in Salesforce Setup (UI)
-
-Setup → Email Templates → open the template → edit Subject/Body
-
-### Option B — Modify in this repo (recommended for versioning)
-
-Edit:
-
-* `force-app/main/default/email/Leads/<Template>.email`
-* `force-app/main/default/email/Leads/<Template>.email-meta.xml`
-
-Deploy:
-
-```powershell
-sf project deploy start -o $Org -m "EmailTemplate:Leads/<DeveloperName>"
-```
+Use the `Address` field (e.g. `noreply@yourdomain.com`). This string
+becomes the `orgWideFromAddress` input to the Apex action.
 
 ---
 
-## How to Add Lots of Templates (Campaign / Variant System)
+## Changing Email Content
 
-This is the recommended reusable pattern for scaling to many templates:
+Email content lives in Salesforce Email Templates. You have two ways to
+modify it:
 
-### Pattern A (Recommended): One Flow, switch template via criteria
+### Option A — Salesforce Setup UI
 
-Use one “router” flow that:
+1. Go to **Setup → Email Templates**.
+2. Open the template → edit Subject/Body.
+3. Save changes.
 
-* checks Lead fields (LeadSource, Company, Campaign tag, etc.)
-* chooses which EmailTemplateId + ContentDocumentId to send
+### Option B — Repository (recommended for version control)
+
+1. Edit:
+
+   * `force-app/main/default/email/Leads/<Template>.email`
+   * `force-app/main/default/email/Leads/<Template>.email-meta.xml`
+
+2. Deploy:
+
+   ```powershell
+   sf project deploy start -o $Org -m "EmailTemplate:Leads/<TemplateDeveloperName>"
+   ```
+
+---
+
+## Extending the System
+
+There are two common patterns for adding new campaigns or variants.
+
+### Pattern A — Single Flow, Template Switch (Recommended)
+
+Create one “router” Flow that inspects Lead fields such as `LeadSource`,
+`Company`, `Campaign` flags, or any custom metadata. Based on these values,
+the Flow chooses which `emailTemplateId` and `contentDocumentId` to pass to
+the Apex action.
 
 Pros:
 
-* fewer flows to maintain
-* centralized debugging
+* Fewer flows to maintain; centralized debugging.
 
 Cons:
 
-* your flow becomes a “dispatcher” (still manageable)
+* Flow becomes a dispatcher and can grow complex.
 
-### Pattern B: One Flow per campaign/variant
+### Pattern B — One Flow per Campaign
 
-For each campaign:
-
-* create a new EmailTemplate
-* clone the base flow
-* update just action inputs (template id + attachment id)
-* deploy
-* test with `test_lead_flow.ps1`
+Clone the base Flow for each campaign and hard-code different template and
+attachment IDs inside each copy.
 
 Pros:
 
-* very easy mental model
-* isolated changes
+* Very simple mental model; isolated changes.
 
 Cons:
 
-* many flows in the org (clutter if you go wild)
+* Many flows in the org can become clutter.
+
+### Adding a New Template + Flow (Step-by-Step)
+
+1. **Create a Template** – add a new file under `force-app/main/default/email/Leads/`
+   and deploy it:
+
+   ```powershell
+   sf project deploy start -o $Org -m "EmailTemplate:Leads/<TemplateDeveloperName>"
+   ```
+
+2. **Clone the Flow** – copy:
+
+   * `force-app/main/default/flows/Lead_Email_ResumeAttachment_OnCreate.flow-meta.xml`
+
+   Rename (file name + internal `<label>` and API name) to:
+
+   * `Lead_Email_<CampaignName>_OnCreate.flow-meta.xml`
+
+3. **Update only the Apex Action inputs** inside the flow:
+
+   * `emailTemplateId = <new 00X...>`
+   * `contentDocumentId = <new 069...>` (optional)
+   * `orgWideFromAddress = <your org-wide address>`
+
+4. **Deploy the Flow**:
+
+   ```powershell
+   sf project deploy start -o $Org -d "force-app/main/default/flows"
+   ```
+
+5. **Test**:
+
+   ```powershell
+   .\test_lead_flow.ps1
+   ```
 
 ---
 
-## Adding a New Email Template + Flow (Reusable Pattern)
+## Swapping the Attached Resume
 
-### Step 1 — Create/Clone a new EmailTemplate
+To change which file is attached:
 
-Add to:
+1. Upload a new resume PDF to Salesforce Files.
+2. Update the Flow input:
 
-* `force-app/main/default/email/Leads/`
-
-Deploy:
-
-```powershell
-sf project deploy start -o $Org -m "EmailTemplate:Leads/<YourTemplateDeveloperName>"
-```
-
-### Step 2 — Clone the flow
-
-Copy:
-
-* `force-app/main/default/flows/Lead_Email_ResumeAttachment_OnCreate.flow-meta.xml`
-
-Rename (file name + internal `<label>` and API name):
-
-* `Lead_Email_<CampaignName>_OnCreate.flow-meta.xml`
-
-### Step 3 — Update only the Apex Action inputs
-
-Inside the flow’s Apex Action call:
-
-* `emailTemplateId = <new 00X...>`
-* `contentDocumentId = <new 069...>` (optional)
-* `orgWideFromAddress = tim@teemails.com`
-
-Deploy:
-
-```powershell
-sf project deploy start -o $Org -d "force-app/main/default/flows"
-```
-
-### Step 4 — Validate with one command
-
-```powershell
-.\test_lead_flow.ps1
-```
-
----
-
-## How to Swap the Attached Resume (New File)
-
-Upload a new resume PDF to Salesforce Files, then update the Flow input:
-
-* `contentDocumentId = <new 069...>`
+   * `contentDocumentId = <new 069...>`
 
 Verify latest version:
 
 ```powershell
 $Doc="069xxxxxxxxxxxxxxx"
-sf data query -o $Org -q "
-SELECT Id, Title, ContentSize, FileType, VersionNumber, CreatedDate
-FROM ContentVersion
-WHERE ContentDocumentId = '$Doc'
-ORDER BY VersionNumber DESC
-LIMIT 1
-"
+sf data query -o $Org -q "SELECT Id, Title, ContentSize, FileType, VersionNumber, CreatedDate FROM ContentVersion WHERE ContentDocumentId = '$Doc' ORDER BY VersionNumber DESC LIMIT 1"
 ```
+
+The Apex action always selects the newest `ContentVersion` for the given `ContentDocumentId`.
 
 ---
 
-## Internal Notification (Email Me When a Lead Is Created)
+## Internal Notification
 
-You confirmed this is already working and you received:
+To send an internal alert each time a Lead triggers the Flow:
 
-> “New Lead Created: Tim Sellwood ([tesellwood5230@gmail.com](mailto:tesellwood5230@gmail.com))”
+1. Add a **Send Email** element to the same Flow.
+2. Configure:
 
-Recommended implementation:
+   * **Recipient Addresses**: internal email(s)
 
-* Add a “Send Email” action node inside the **same active flow** (`Lead Email - Resume Attachment (On Create)`)
+   * **Sender Type**: `OrgWideEmailAddress`
 
-**Send Email action inputs:**
+   * **Sender Email Address**: choose your org-wide sender
 
-* Recipient Addresses: `sellwood.timm@gmail.com`
-* Sender Type: `OrgWideEmailAddress`
-* Sender Email Address: `tim@teemails.com`
-* Subject:
+   * **Subject**:
 
-  * `New Lead Created: {!$Record.FirstName} {!$Record.LastName} ({!$Record.Email})`
-* Body:
+     ```
+     New Lead Created: {!$Record.FirstName} {!$Record.LastName} ({!$Record.Email})
+     ```
 
-  * Name: `{!$Record.FirstName} {!$Record.LastName}`
-  * Email: `{!$Record.Email}`
-  * Company: `{!$Record.Company}`
-  * Lead Source: `{!$Record.LeadSource}`
-  * Created: `{!$Record.CreatedDate}`
-  * Lead Id: `{!$Record.Id}`
+   * **Body**:
+
+     ```
+     Name: {!$Record.FirstName} {!$Record.LastName}
+     Email: {!$Record.Email}
+     Company: {!$Record.Company}
+     Lead Source: {!$Record.LeadSource}
+     Created: {!$Record.CreatedDate}
+     Lead Id: {!$Record.Id}
+     ```
 
 Placement:
 
-* **before** resume send = you get notified even if attachment send fails
-* **after** resume send = notification implies success
+* Put it **before** resume send if you want notification even if attachment send fails.
+* Put it **after** resume send if notification implies success.
 
 ---
 
-## Testing & Debugging Workflow (Best Practice)
+## Debugging & Test Workflow
 
-### 1) Always test with the same command
+### Always test with the same command
 
 ```powershell
 .\test_lead_flow.ps1
 ```
 
-### 2) Always verify the debug status in Lead.Description
+### Always verify the debug status in Lead.Description
 
-If anything fails, you’ll see `EMAIL_FAULT | ERROR=...`
+The Flow writes deterministic debug tokens to `Lead.Description`:
 
-### 3) If a new template/flow is added:
+| Status          | Meaning                 |                         |
+| --------------- | ----------------------- | ----------------------- |
+| `STARTED`       | Flow began running      |                         |
+| `CALLING_EMAIL` | About to call Apex      |                         |
+| `EMAIL_SENT`    | Email successfully sent |                         |
+| `EMAIL_FAULT    | ERROR=<details>`        | Failure; error appended |
 
-* deploy template
-* deploy flow
-* run test script
-* confirm:
-
-  * resume email arrives w/ attachment
-  * internal notification arrives (if enabled)
+If you see `EMAIL_FAULT`, use the error details and the troubleshooting section below.
 
 ---
 
-## Troubleshooting (Common)
+## Troubleshooting
 
 ### “Org-Wide Email provided is not valid”
 
-* Your Flow/Apex must use an **Address** that exists in OrgWideEmailAddress
-* Verify:
+* The Flow/Apex must use an Address that exists in OrgWideEmailAddress.
+
+Verify:
 
 ```powershell
 sf data query -o $Org -q "SELECT Id, Address FROM OrgWideEmailAddress"
 ```
 
-* Make sure Flow input matches exactly (e.g., `tim@teemails.com`).
+* Ensure Flow input matches exactly (e.g. `tim@teemails.com`).
 
 ### Lead created but no attachment
 
-* Flow must pass **ContentDocumentId (069...)**, not ContentVersionId (068...)
+* Flow must pass **ContentDocumentId (069...)**, not ContentVersionId (068...).
 * Verify ContentVersion exists:
 
 ```powershell
 $Doc="069..."
-sf data query -o $Org -q "
-SELECT Id, Title, ContentSize, FileType, VersionNumber
-FROM ContentVersion
-WHERE ContentDocumentId = '$Doc'
-ORDER BY VersionNumber DESC
-LIMIT 1"
+sf data query -o $Org -q "SELECT Id, Title, ContentSize, FileType, VersionNumber FROM ContentVersion WHERE ContentDocumentId = '$Doc' ORDER BY VersionNumber DESC LIMIT 1"
 ```
 
 ### Debugging quickly
@@ -442,7 +400,7 @@ LIMIT 1"
 
 ---
 
-## Glossary (Salesforce Terms Used Here)
+## Glossary
 
 * **Flow (Record-Triggered)**: automation that runs when a record is created/updated
 * **Email Template**: subject/body template with merge fields
@@ -453,7 +411,7 @@ LIMIT 1"
 
 ---
 
-## Deployment Commands (Cheat Sheet)
+## Deployment Commands
 
 Deploy Apex:
 
@@ -481,272 +439,18 @@ Run end-to-end test:
 
 ---
 
-## GitHub “Done” Definition
+## Repo Hygiene
 
-Per project policy: this project is complete only when the final state is pushed to:
-[https://github.com/Fxdedglory/Salesforce-Auto-Reply-Web-To-Lead](https://github.com/Fxdedglory/Salesforce-Auto-Reply-Web-To-Lead)
-
-You’ve got two “this file” candidates in your output:
-
-* **`force-app/main/default/flows/Opp_CRM_Router_AfterSave.flow-meta.xml`** (the real flow)
-* **`force-app/main/default/flows/Opp_CRM_Router_AfterSave.flow-meta.xml.localbak_20260218_201714`** (a stray backup artifact that **should NOT** be committed)
-
-I’m going to assume you mean the **real router flow** (`Opp_CRM_Router_AfterSave`), because that’s the orchestrator and it’s what’s generating your `[SF_Log_Run] ... MILESTONE_ROUTER_FIRED` tasks.
-
-Below is (A) what it impacts / connects to, (B) the exact PowerShell commands to prove it from your repo, and (C) a README you can paste that documents “how to use this system next time” + “how to get any info you need”.
+* Do **not** commit local backups / temp files (e.g. `*.bak*`, `*.localbak_*`, `_archive*`, `_disabled_*`, temp zip artifacts, Apex logs).
+* Prefer adding ignore patterns to `.gitignore` to prevent accidental commits.
 
 ---
 
-# A) What files / components are impacted by `Opp_CRM_Router_AfterSave`
+## Final Notes
 
-## Direct runtime dependencies (what must exist + be Active)
+This runbook is designed to preserve the two core strengths of this system:
 
-1. **`force-app/main/default/flows/SF_Log_Run.flow-meta.xml`**
+1. **Reusability**: add templates/campaigns without rewriting Apex.
+2. **Debuggability**: deterministic, visible progress via `Lead.Description` plus a single-command test runner.
 
-* Your router emits tasks via `SF_Log_Run` (your Task table output confirms it).
-
-2. **`force-app/main/default/flows/Opp_Reapproval_Guardrail.flow-meta.xml`**
-
-* Your guardrail flow is being invoked and logging:
-
-  * `MILESTONE_REAPPROVAL_GUARDRAIL_NOTLATESTAGE`
-  * `MILESTONE_REAPPROVAL_GUARDRAIL_LATESTAGE`
-
-3. **Opportunity object + the fields referenced**
-
-* At minimum `Opportunity.Id` and `Opportunity.StageName` (you fixed the “StageName doesn’t exist” errors earlier by ensuring the record lookup pulls StageName and using a non-conflicting variable name).
-
-## Indirect dependencies (commonly used alongside)
-
-4. **`force-app/main/default/flows/SF_Notify_Milestone.flow-meta.xml`** (if router uses it)
-
-* You deployed it; whether router calls it depends on references inside `Opp_CRM_Router_AfterSave`.
-
-5. **`force-app/main/default/workflows/Opportunity.workflow-meta.xml`** (if you still have classic workflow rules)
-
-* Not necessarily called by Flow directly, but it’s part of the same object automation surface area and can “also fire” when the same record changes happen.
-
-## Logging output (downstream data)
-
-6. **Tasks in Salesforce (`Task` object)**
-
-* Your logging is persisted as `Task` records. That is a “data dependency”: your “observability” depends on Task creation permissions and field availability.
-
----
-
-# B) Prove the connections from your repo (dependency scan commands)
-
-Run these exactly (they’ll tell you what else `Opp_CRM_Router_AfterSave` references).
-
-## 1) Find subflow calls / referenced flows
-
-```powershell
-$router="E:\Salesforce\force-app\main\default\flows\Opp_CRM_Router_AfterSave.flow-meta.xml"
-
-# show any referenced flows by name
-Select-String -Path $router -Pattern "<flowName>|<subflow>|<subflows>|<flowReference>|<flow>" -Context 0,3
 ```
-
-## 2) Find what sObjects + fields it touches
-
-```powershell
-Select-String -Path $router -Pattern "<object>|<sobject>|<field>|<fieldReference>|<elementReference>|StageName|Opportunity\." -Context 0,2
-```
-
-## 3) Find every place it writes logs (SF_Log_Run usage)
-
-```powershell
-Select-String -Path $router -Pattern "SF_Log_Run|MILESTONE_|PipelineKey|Severity|Message|RecordId" -Context 0,3
-```
-
-## 4) Build a “who references who” view across *all* flows
-
-This shows which flows call `SF_Log_Run`, which call `Opp_Reapproval_Guardrail`, etc.
-
-```powershell
-$flows="E:\Salesforce\force-app\main\default\flows\*.flow-meta.xml"
-
-# Who calls SF_Log_Run?
-"`n=== Flows that call SF_Log_Run ==="
-Select-String -Path $flows -Pattern "<flowName>SF_Log_Run</flowName>" |
-  Select Path,LineNumber,Line
-
-# Who calls Opp_Reapproval_Guardrail?
-"`n=== Flows that call Opp_Reapproval_Guardrail ==="
-Select-String -Path $flows -Pattern "<flowName>Opp_Reapproval_Guardrail</flowName>" |
-  Select Path,LineNumber,Line
-```
-
-## 5) Identify the “stray backup” that must be removed from staging
-
-You already found:
-
-* `Opp_CRM_Router_AfterSave.flow-meta.xml.localbak_20260218_201714`
-
-Fix it now (do **not** commit it):
-
-```powershell
-git restore --staged force-app/main/default/flows/Opp_CRM_Router_AfterSave.flow-meta.xml.localbak_20260218_201714 2>$null
-Remove-Item force-app/main/default/flows/Opp_CRM_Router_AfterSave.flow-meta.xml.localbak_20260218_201714 -Force
-```
-
-Then prevent it forever:
-
-```powershell
-Add-Content .gitignore "`n# local flow backups`n*.localbak_*`n"
-git add .gitignore
-```
-
----
-
-# C) README you want (system usage + how to retrieve info next time)
-
-Paste this into `README.md` (or replace the CRM section with it).
-
-````md
-# Salesforce CRM Automation (Opp CRM v1)
-
-## What this repo contains
-This repo stores Salesforce metadata for:
-- Lead intake + DocuSign flows (Lead pipeline)
-- Opportunity routing + guardrails (Opp CRM v1)
-- Centralized logging via Task creation (`SF_Log_Run`)
-
-Everything is deployable via `sf project deploy start` from this repo.
-
----
-
-## Key Automation: Opportunity Router + Guardrail
-
-### Primary flows
-| Flow | Type | Purpose |
-|---|---|---|
-| `Opp_CRM_Router_AfterSave` | Record-Triggered Flow (Opportunity) | Orchestrates downstream milestone actions when an Opportunity updates (e.g., stage changes). |
-| `Opp_Reapproval_Guardrail` | Auto-Launched Flow | Validates if Opportunity is in a “late stage” and logs the result. |
-| `SF_Log_Run` | Auto-Launched Flow | Writes observability logs to the **Task** object (Subject + Description). |
-| `SF_Notify_Milestone` | (Optional) | Notification helper if referenced by router. |
-
-### How the router logs
-All runtime telemetry is written to `Task` records in Salesforce.
-
-Subject format:
-`[SF_Log_Run] <LEVEL> | <PIPELINE> | <MILESTONE>`
-
-Description format includes:
-- `RecordId=<OpportunityId>`
-- `Message=<free text>`
-- `MilestoneKey=<constant>`
-
----
-
-## How to verify the system is working
-
-### 1) Confirm flows are Active in the org
-```sql
--- Tooling API SOQL
-SELECT DeveloperName, ActiveVersionId, LatestVersionId
-FROM FlowDefinition
-WHERE DeveloperName IN ('Opp_CRM_Router_AfterSave','Opp_Reapproval_Guardrail','SF_Log_Run')
-````
-
-Expected:
-
-* `ActiveVersionId == LatestVersionId` for each flow.
-
-### 2) Trigger the router (example: update StageName)
-
-Update an Opportunity stage:
-
-* non-late stage → should log NOTLATESTAGE
-* late stage (e.g., Contracting) → should log LATESTAGE
-
-### 3) Query logs (Task records created today)
-
-```sql
-SELECT Id, Subject, Description, CreatedDate
-FROM Task
-WHERE CreatedDate = TODAY
-ORDER BY CreatedDate DESC
-LIMIT 50
-```
-
-Common milestones you should see:
-
-* `MILESTONE_ROUTER_FIRED`
-* `MILESTONE_REAPPROVAL_GUARDRAIL_NOTLATESTAGE`
-* `MILESTONE_REAPPROVAL_GUARDRAIL_LATESTAGE`
-
----
-
-## How to find dependencies next time (flow → flow + flow → field mapping)
-
-### Flow-to-flow references (subflows)
-
-Search for subflow calls:
-
-```powershell
-Select-String -Path force-app/main/default/flows/*.flow-meta.xml -Pattern "<flowName>" |
-  Select Path,LineNumber,Line
-```
-
-To locate who calls `SF_Log_Run`:
-
-```powershell
-Select-String -Path force-app/main/default/flows/*.flow-meta.xml -Pattern "<flowName>SF_Log_Run</flowName>" |
-  Select Path,LineNumber,Line
-```
-
-### Field usage (what objects/fields a flow depends on)
-
-Example:
-
-```powershell
-Select-String -Path force-app/main/default/flows/Opp_CRM_Router_AfterSave.flow-meta.xml `
-  -Pattern "Opportunity|StageName|<object>|<queriedFields>|<fieldReference>" -Context 0,2
-```
-
----
-
-## Deploying from this repo
-
-### Deploy flows only
-
-```powershell
-sf project deploy start --source-dir force-app/main/default/flows --test-level NoTestRun -o <orgAliasOrUsername>
-```
-
-### Deploy everything under force-app
-
-```powershell
-sf project deploy start --source-dir force-app --test-level NoTestRun -o <orgAliasOrUsername>
-```
-
----
-
-## Repo hygiene rules (IMPORTANT)
-
-### Do not commit local backups / temp files
-
-Never commit:
-
-* `*.bak*`
-* `*.localbak_*`
-* `_archive*`, `_disabled_*`, `tmp*`, `mdapi_tmp*`, raw `apexlog_*.txt`
-
-If a backup file appears, delete it or move it outside `force-app/`.
-
----
-
-## Troubleshooting
-
-### Router triggers but no logs show up
-
-* Confirm `SF_Log_Run` is Active
-* Confirm the running user has permission to create Tasks
-* Query Task records for today to verify telemetry
-
-### Flow activation errors (InvalidDraft)
-
-* Pull the flow XML (`sf project retrieve start`)
-* Fix references to missing fields / invalid variables
-* Redeploy and confirm `FlowDefinition.ActiveVersionId` updates

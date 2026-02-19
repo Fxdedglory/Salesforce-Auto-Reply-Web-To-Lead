@@ -49,6 +49,7 @@ unpackaged/
 # =========================
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 *.crt
