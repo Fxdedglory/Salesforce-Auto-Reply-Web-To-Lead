@@ -357,7 +357,7 @@
         <recordTriggerType>Create</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>Obsolete</status>
+    <status>Active</status>
     <variables>
         <description>Debug error message</description>
         <name>var_DebugError</name>
@@ -383,4 +383,3 @@
         <isOutput>false</isOutput>
     </variables>
 </Flow>
-

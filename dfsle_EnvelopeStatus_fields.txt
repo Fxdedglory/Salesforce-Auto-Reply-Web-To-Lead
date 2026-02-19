@@ -1,0 +1,35 @@
+﻿
+name                       label                     type     
+----                       -----                     ----     
+CreatedById                Created By ID             reference
+CreatedDate                Created Date              datetime 
+dfsle__Account__c          Account                   reference
+dfsle__Case__c             Case                      reference
+dfsle__Completed__c        Completed                 datetime 
+dfsle__Contact__c          Contact                   reference
+dfsle__Contract__c         Contract                  reference
+dfsle__DocuSignId__c       DocuSign envelope ID      string   
+dfsle__EmailSubject__c     Email Subject             string   
+dfsle__Expires__c          Expires                   datetime 
+dfsle__LastStatusUpdate__c Last Status Update        datetime 
+dfsle__Lead__c             Lead                      reference
+dfsle__Opportunity__c      Opportunity               reference
+dfsle__Reason__c           Declined or Voided Reason textarea 
+dfsle__SenderEmail__c      Sender Email              email    
+dfsle__SenderName__c       Sender Name               string   
+dfsle__Sent__c             Sent                      datetime 
+dfsle__SourceId__c         Salesforce Source ID      string   
+dfsle__Status__c           Status                    string   
+dfsle__TimeToComplete__c   Time to Complete          string   
+Id                         Record ID                 id       
+IsDeleted                  Deleted                   boolean  
+LastActivityDate           Last Activity Date        date     
+LastModifiedById           Last Modified By ID       reference
+LastModifiedDate           Last Modified Date        datetime 
+LastReferencedDate         Last Referenced Date      datetime 
+LastViewedDate             Last Viewed Date          datetime 
+Name                       Envelope#                 string   
+OwnerId                    Owner ID                  reference
+SystemModstamp             System Modstamp           datetime 
+
+

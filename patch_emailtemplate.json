@@ -1,0 +1,1 @@
+﻿{"Subject":"New Lead Alert - {{Recipient.FirstName}} {{Recipient.LastName}} | {{Recipient.Company}}"}

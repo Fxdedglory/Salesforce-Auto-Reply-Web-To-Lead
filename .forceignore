@@ -10,3 +10,14 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
+
+**/*.bak
+**/*.bak_*
+**/*.bak.*
+**/*~ 
+**/*.tmp
+**/*.flow-meta.xml.*
+**/*.email-meta.xml.*
+**/*.cls-meta.xml.*
+**/*.object-meta.xml.*
+**/*.field-meta.xml.*

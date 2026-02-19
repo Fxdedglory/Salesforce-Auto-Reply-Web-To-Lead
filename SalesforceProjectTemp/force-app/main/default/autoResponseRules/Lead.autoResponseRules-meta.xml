@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>scheduleACall</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <senderEmail>tim@teemails.com</senderEmail>
+            <senderName>Tim Sellwood</senderName>
+            <template>Leads/Web_to_lead_Auto_Response_v5_1771283904635</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

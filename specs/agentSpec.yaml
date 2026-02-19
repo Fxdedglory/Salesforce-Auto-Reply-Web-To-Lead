@@ -1,0 +1,18 @@
+agentType: internal
+companyName: self
+companyDescription: self
+role: New Lead Email Alert
+maxNumOfTopics: 5
+enrichLogs: false
+tone: casual
+topics:
+  - name: Lead Data Enrichment
+    description: Enhance lead profiles with relevant data.
+  - name: Lead Scoring Automation
+    description: Assign scores to leads based on predefined criteria.
+  - name: Duplicate Lead Detection
+    description: Identify and flag duplicate lead entries.
+  - name: Lead Assignment Rules
+    description: Automatically assign leads to appropriate owners.
+  - name: Lead Conversion Insights
+    description: Provide analytics for lead conversion trends.

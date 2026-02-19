@@ -1,0 +1,13 @@
+﻿[1m65.0 APEX_CODE,FINEST;APEX_PROFILING,FINEST;CALLOUT,FINEST;DATA_ACCESS,INFO;DB,FINEST;NBA,INFO;SYSTEM,FINEST;VALIDATION,FINEST;VISUALFORCE,FINER;WAVE,INFO;WORKFLOW,FINEST[22m
+[94m19[39m:[94m25[39m:[94m41[39m.[94m1[39m ([94m1895536[39m)[1m[32m|USER_INFO|[39m[22m[EXTERNAL]|005gK000021e3QR|[94msellwood.timm.b2526c60dcf4[39m@[94magentforce.com[39m|(GMT-[94m08[39m:[94m00[39m) Pacific Standard Time (America/Los_Angeles)|GMT-[94m08[39m:[94m00[39m
+[94m19[39m:[94m25[39m:[94m41[39m.[94m1[39m ([94m2084565[39m)|EXECUTION_STARTED
+[94m19[39m:[94m25[39m:[94m41[39m.[94m1[39m ([94m2112245[39m)|CODE_UNIT_STARTED|[EXTERNAL]|Flow:Opportunity
+[94m19[39m:[94m25[39m:[94m41[39m.[94m1[39m ([94m2142906[39m)|CODE_UNIT_FINISHED|Flow:Opportunity
+[94m19[39m:[94m25[39m:[94m41[39m.[94m1[39m ([94m2157220[39m)|EXECUTION_FINISHED
+[94m19[39m:[94m25[39m:[94m41[39m.[94m2[39m ([94m2178673[39m)|CUMULATIVE_PROFILING_BEGIN
+[94m19[39m:[94m25[39m:[94m41[39m.[94m2[39m ([94m2178673[39m)|CUMULATIVE_PROFILING|No profiling information for SOQL operations
+[94m19[39m:[94m25[39m:[94m41[39m.[94m2[39m ([94m2178673[39m)|CUMULATIVE_PROFILING|No profiling information for SOSL operations
+[94m19[39m:[94m25[39m:[94m41[39m.[94m2[39m ([94m2178673[39m)|CUMULATIVE_PROFILING|No profiling information for DML operations
+[94m19[39m:[94m25[39m:[94m41[39m.[94m2[39m ([94m2178673[39m)|CUMULATIVE_PROFILING|No profiling information for method invocations
+[94m19[39m:[94m25[39m:[94m41[39m.[94m2[39m ([94m2178673[39m)|CUMULATIVE_PROFILING_END
+

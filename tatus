@@ -1,0 +1,38 @@
+warning: in the working copy of '.forceignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/flows/Docusign_Leads.flow-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/flows/Lead_Auto_Email.flow-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/flows/Lead_Email_ResumeAttachment_OnCreate.flow-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/objects/Docusign_Template_Asset__c/Docusign_Template_Asset__c.object-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/objects/Docusign_Template_Asset__c/fields/Active__c.field-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/objects/Docusign_Template_Asset__c/fields/ResumeContentDocumentId__c.field-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/objects/Docusign_Template_Asset__c/fields/StampedApprovalContentDocumentId__c.field-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/objects/Lead/fields/DocuSign_Email_Sent__c.field-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'force-app/main/default/workflows/Lead.workflow-meta.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'mdapi_deploy_v0_1_8/unpackaged/package.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'sfdx-project.json', LF will be replaced by CRLF the next time Git touches it
+ .forceignore                                       |  13 [32m+[m[31m-[m
+ .gitignore                                         |   3 [32m+[m
+ README.md                                          | 431 [32m++++++++++[m[31m--------[m
+ ...to_Response_v5_1771283904635.email-meta.xml.bak |  11 [31m-[m
+ ...o_lead_Auto_Response_v5_1771283904635.email.bak |  15 [31m-[m
+ ..._lead_Auto_Response_v5_1771283904635.email.bak2 |  15 [31m-[m
+ .../default/flows/Docusign_Leads.flow-meta.xml     |   2 [32m+[m[31m-[m
+ .../default/flows/Lead_Auto_Email.flow-meta.xml    |   2 [32m+[m[31m-[m
+ ..._DocuSign_And_EmailAlert_OnCreate.flow-meta.xml |   3 [32m+[m[31m-[m
+ ...uSign_And_EmailAlert_OnCreate.flow-meta.xml.bak | 499 [31m---------------------[m
+ .../flows/Lead_DocuSign_OnCreate.flow-meta.xml     |   3 [32m+[m[31m-[m
+ .../flows/Lead_DocuSign_OnCreate.flow-meta.xml.bak | 385 [31m----------------[m
+ ...d_Email_ResumeAttachment_OnCreate.flow-meta.xml | 343 [32m++++++++[m[31m------[m
+ .../Docusign_Template_Asset__c.object-meta.xml     |   4 [32m+[m[31m-[m
+ .../fields/Active__c.field-meta.xml                |   5 [31m-[m
+ .../ResumeContentDocumentId__c.field-meta.xml      |   4 [32m+[m[31m-[m
+ ...mpedApprovalContentDocumentId__c.field-meta.xml |   4 [32m+[m[31m-[m
+ .../fields/DocuSign_Email_Sent__c.field-meta.xml   |   7 [32m+[m[31m-[m
+ force-app/main/default/objects/Lead/fields/test    |   0
+ .../main/default/workflows/Lead.workflow-meta.xml  |  19 [32m+[m
+ .../fields/DocuSign_Email_Sent__c.field-meta.xml   |   9 [31m-[m
+ mdapi_deploy_v0_1_8/unpackaged/package.xml         |   8 [32m+[m[31m-[m
+ sfdx-project.json                                  |   2 [32m+[m[31m-[m
+ 23 files changed, 482 insertions(+), 1305 deletions(-)

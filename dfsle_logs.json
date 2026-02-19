@@ -1,0 +1,1017 @@
+﻿{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzijUAC"
+        },
+        "CreatedDate": "2026-02-18T02:23:31.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "dca3508a-7e8c-bce1-956f-98f9cefca720",
+        "dfsle__SourceId__c": "00QgK00000BBg5dUAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nzh7UAC"
+        },
+        "CreatedDate": "2026-02-18T02:23:30.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "bf87f003-334e-62e6-91d2-32467067eada",
+        "dfsle__SourceId__c": "00QgK00000BBg5dUAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzfVUAS"
+        },
+        "CreatedDate": "2026-02-18T02:23:29.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "473c3338-210d-15d9-ffeb-4fae8e1b8aa7",
+        "dfsle__SourceId__c": "00QgK00000BBg5dUAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzdtUAC"
+        },
+        "CreatedDate": "2026-02-18T02:08:28.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "9dfb8b38-c98e-59d7-58f8-a94ba40eb9d8",
+        "dfsle__SourceId__c": "00QgK00000BBelNUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzcHUAS"
+        },
+        "CreatedDate": "2026-02-18T02:08:28.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "e78481b6-d035-45b6-6ed4-dc2b54230286",
+        "dfsle__SourceId__c": "00QgK00000BBelNUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzafUAC"
+        },
+        "CreatedDate": "2026-02-18T02:08:26.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "48227921-d8c0-6816-3d4d-b58384e4987b",
+        "dfsle__SourceId__c": "00QgK00000BBelNUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzZ3UAK"
+        },
+        "CreatedDate": "2026-02-18T02:00:15.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "a32f13ba-fa97-acb3-fb50-8a66c6ee1998",
+        "dfsle__SourceId__c": "00QgK00000BBeAHUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzXRUA0"
+        },
+        "CreatedDate": "2026-02-18T02:00:07.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "2079ecc7-38d8-8c39-8712-23f5a40cbbee",
+        "dfsle__SourceId__c": "00QgK00000BBeAHUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzVpUAK"
+        },
+        "CreatedDate": "2026-02-18T02:00:05.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "080a2748-b204-0441-b223-cc609b6aa115",
+        "dfsle__SourceId__c": "00QgK00000BBeAHUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzUDUA0"
+        },
+        "CreatedDate": "2026-02-18T01:50:43.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "8c2c94ad-a961-870c-cb52-5f4cc6a5679c",
+        "dfsle__SourceId__c": "00QgK00000BBd9NUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzQzUAK"
+        },
+        "CreatedDate": "2026-02-18T01:50:42.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "3bf40d5e-309f-5898-87d0-4ba0c8469f43",
+        "dfsle__SourceId__c": "00QgK00000BBd9NUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzSbUAK"
+        },
+        "CreatedDate": "2026-02-18T01:50:42.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "0b30519b-6bd4-6abe-3913-ba9cd1bf1782",
+        "dfsle__SourceId__c": "00QgK00000BBd9NUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NzArUAK"
+        },
+        "CreatedDate": "2026-02-18T00:10:42.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "940bcd99-a774-a286-8411-17744a6319f9",
+        "dfsle__SourceId__c": "00QgK00000BBT3ZUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nz9FUAS"
+        },
+        "CreatedDate": "2026-02-18T00:10:41.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "dd2c939e-b5a1-4657-1e67-e139e97378ae",
+        "dfsle__SourceId__c": "00QgK00000BBT3ZUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nz7dUAC"
+        },
+        "CreatedDate": "2026-02-18T00:10:35.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "9e04292a-8645-130e-ff22-e6791a546f52",
+        "dfsle__SourceId__c": "00QgK00000BBT3ZUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyzZUAS"
+        },
+        "CreatedDate": "2026-02-17T23:57:26.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "c2c4aa7b-a763-cb77-38cb-ca31f9701bed",
+        "dfsle__SourceId__c": "00QgK00000BBDYIUA5",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nz1BUAS"
+        },
+        "CreatedDate": "2026-02-17T23:57:26.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "3447d511-a7fc-9ed2-ee1b-8eaa6e525d7a",
+        "dfsle__SourceId__c": "00QgK00000BBDYIUA5",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyxxUAC"
+        },
+        "CreatedDate": "2026-02-17T23:52:48.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "62106f04-8da7-11b6-df00-a7f14cacf840",
+        "dfsle__SourceId__c": "00QgK00000BBSFZUA5",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NywLUAS"
+        },
+        "CreatedDate": "2026-02-17T23:52:48.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "c2ef3757-e821-fa12-5e0e-7bec16d1a085",
+        "dfsle__SourceId__c": "00QgK00000BBSFZUA5",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyujUAC"
+        },
+        "CreatedDate": "2026-02-17T23:49:02.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "da1a2ae7-731d-c626-d642-52f3c47bc809",
+        "dfsle__SourceId__c": "00QgK00000BBS5tUAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nyt7UAC"
+        },
+        "CreatedDate": "2026-02-17T23:49:02.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "14fcd299-5c63-3b5c-cc2a-fa3498f52da8",
+        "dfsle__SourceId__c": "00QgK00000BBS5tUAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyptUAC"
+        },
+        "CreatedDate": "2026-02-17T23:39:59.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "f3b1519d-2fdb-d703-91ca-41de410bc94b",
+        "dfsle__SourceId__c": "00QgK00000BBPxdUAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyrVUAS"
+        },
+        "CreatedDate": "2026-02-17T23:39:59.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "3be1a2b8-4137-4a3a-b2af-c21a67efb159",
+        "dfsle__SourceId__c": "00QgK00000BBPxdUAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyoHUAS"
+        },
+        "CreatedDate": "2026-02-17T22:49:10.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "92ce2e46-54ec-903a-9d1d-0c02f4fda430",
+        "dfsle__SourceId__c": "00QgK00000BBMwXUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NymfUAC"
+        },
+        "CreatedDate": "2026-02-17T22:49:08.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "d338e20b-3ab6-a8be-e455-8c338addc0c9",
+        "dfsle__SourceId__c": "00QgK00000BBMwXUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nyl3UAC"
+        },
+        "CreatedDate": "2026-02-17T22:38:46.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "5b358682-82a3-f66b-da44-d2c40059f2b3",
+        "dfsle__SourceId__c": "00QgK00000BBL61UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyjRUAS"
+        },
+        "CreatedDate": "2026-02-17T22:38:42.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "2c270251-1645-d995-61dd-7ee0e138ceab",
+        "dfsle__SourceId__c": "00QgK00000BBL61UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyhpUAC"
+        },
+        "CreatedDate": "2026-02-17T22:38:41.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "98ab0610-f8f0-defd-85e9-43005c57e7a1",
+        "dfsle__SourceId__c": "00QgK00000BBL61UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NygDUAS"
+        },
+        "CreatedDate": "2026-02-17T22:03:52.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "60add761-c8c3-ce53-c652-c4fc9fadf3ed",
+        "dfsle__SourceId__c": "00QgK00000BBH7FUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyebUAC"
+        },
+        "CreatedDate": "2026-02-17T22:03:49.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "202a9947-6a68-09cc-749e-9a21c58f7380",
+        "dfsle__SourceId__c": "00QgK00000BBH7FUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyczUAC"
+        },
+        "CreatedDate": "2026-02-17T22:03:48.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "480fe2e5-9411-8b06-0a08-7c3819a537a2",
+        "dfsle__SourceId__c": "00QgK00000BBH7FUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyWXUA0"
+        },
+        "CreatedDate": "2026-02-17T21:31:07.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "95ca0ca1-376e-09cd-f982-f7dd8ff8d57e",
+        "dfsle__SourceId__c": "00QgK00000BBD21UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyZlUAK"
+        },
+        "CreatedDate": "2026-02-17T21:31:07.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "6bddf34f-102a-7c23-bc63-6fe6547a7b66",
+        "dfsle__SourceId__c": "00QgK00000BBD21UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyY9UAK"
+        },
+        "CreatedDate": "2026-02-17T21:31:07.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "31ba9db8-3c1f-0226-282d-dbc567e0aa48",
+        "dfsle__SourceId__c": "00QgK00000BBD21UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyTJUA0"
+        },
+        "CreatedDate": "2026-02-17T21:27:47.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "8f5ea71d-fcbd-9cde-346c-1d08e0f51295",
+        "dfsle__SourceId__c": "00QgK00000BBCp7UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyRhUAK"
+        },
+        "CreatedDate": "2026-02-17T21:27:38.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "dfccb3c0-55bd-77ca-41f9-8bd154c2e08b",
+        "dfsle__SourceId__c": "00QgK00000BBCp7UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyQ5UAK"
+        },
+        "CreatedDate": "2026-02-17T21:27:38.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "a5d44269-134b-28bc-df23-f6ccb06cb025",
+        "dfsle__SourceId__c": "00QgK00000BBCp7UAH",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyMrUAK"
+        },
+        "CreatedDate": "2026-02-17T21:22:42.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "1fb67876-175d-a75a-633d-1ef4da8054f0",
+        "dfsle__SourceId__c": "00QgK00000BBCE1UAP",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyLFUA0"
+        },
+        "CreatedDate": "2026-02-17T21:22:42.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "9ad8cad0-5b46-9926-4e2c-56436aa74192",
+        "dfsle__SourceId__c": "00QgK00000BBCE1UAP",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyJdUAK"
+        },
+        "CreatedDate": "2026-02-17T21:21:30.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "0ba7b99e-49c1-6bd8-6342-be4998ff9637",
+        "dfsle__SourceId__c": "00QgK00000BBC7ZUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NyI1UAK"
+        },
+        "CreatedDate": "2026-02-17T21:21:30.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "cf742ceb-272d-1bd4-7110-f771aca4ebe4",
+        "dfsle__SourceId__c": "00QgK00000BBC7ZUAX",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Ny8LUAS"
+        },
+        "CreatedDate": "2026-02-17T20:40:32.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "ca950f52-715c-0970-1caf-279ac568ee05",
+        "dfsle__SourceId__c": "00QgK00000BB6IHUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Ny6jUAC"
+        },
+        "CreatedDate": "2026-02-17T20:40:31.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "b77ba7cc-d308-c6e9-6ae9-8df110a0ab54",
+        "dfsle__SourceId__c": "00QgK00000BB6IHUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Ny57UAC"
+        },
+        "CreatedDate": "2026-02-17T20:38:31.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "c7ddecc5-3183-7347-9b10-a7f192729fe0",
+        "dfsle__SourceId__c": "00QgK00000BB6BpUAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Ny3VUAS"
+        },
+        "CreatedDate": "2026-02-17T20:38:23.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "403a2dc2-30c1-887f-25fa-c6a632e6e40c",
+        "dfsle__SourceId__c": "00QgK00000BB6BpUAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxH8UAK"
+        },
+        "CreatedDate": "2026-02-17T20:31:03.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "c139b72d-ea30-3b7a-c0e1-67a203bedc91",
+        "dfsle__SourceId__c": "00QgK00000BB1X8UAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Ny0HUAS"
+        },
+        "CreatedDate": "2026-02-17T20:31:02.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "c9bc6bcd-6267-67a4-31b3-90d6c9b7efcc",
+        "dfsle__SourceId__c": "00QgK00000BB1X8UAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxvRUAS"
+        },
+        "CreatedDate": "2026-02-17T20:24:06.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "d581d35a-6493-f598-9a7e-ae80dd4a774d",
+        "dfsle__SourceId__c": "00QgK00000BB5R3UAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxtpUAC"
+        },
+        "CreatedDate": "2026-02-17T20:24:04.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "0b8bc04c-8750-f617-a53d-5f93ae4ed97f",
+        "dfsle__SourceId__c": "00QgK00000BB5R3UAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxqbUAC"
+        },
+        "CreatedDate": "2026-02-17T20:14:42.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "6948af86-0488-8252-4504-9f12496897e4",
+        "dfsle__SourceId__c": "00QgK00000BB4pxUAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxozUAC"
+        },
+        "CreatedDate": "2026-02-17T20:14:39.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "0b53ce87-4ada-97d7-970e-d63ef876abae",
+        "dfsle__SourceId__c": "00QgK00000BB4pxUAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxllUAC"
+        },
+        "CreatedDate": "2026-02-17T20:11:35.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "4eebd655-95c3-9fe1-d91a-fe03122e808e",
+        "dfsle__SourceId__c": "00QgK00000BB4A1UAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nxk9UAC"
+        },
+        "CreatedDate": "2026-02-17T20:11:33.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "fe518300-1b12-f5a2-cecd-468be5c5ab4c",
+        "dfsle__SourceId__c": "00QgK00000BB4A1UAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxiXUAS"
+        },
+        "CreatedDate": "2026-02-17T20:09:13.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "eb8309ea-35e3-4844-85f3-826f3a705adb",
+        "dfsle__SourceId__c": "00QgK00000BAyMNUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxgvUAC"
+        },
+        "CreatedDate": "2026-02-17T20:09:13.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "4b6d10a7-3965-d6b4-be23-cbd4cf5293a9",
+        "dfsle__SourceId__c": "00QgK00000BAyMNUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxfJUAS"
+        },
+        "CreatedDate": "2026-02-17T20:08:41.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "297a73a6-29ad-510b-aa74-d697b0c368ec",
+        "dfsle__SourceId__c": "00QgK00000BB45BUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxdhUAC"
+        },
+        "CreatedDate": "2026-02-17T20:08:41.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "2c1f27df-8478-154f-9e7e-875e4fd1c4f2",
+        "dfsle__SourceId__c": "00QgK00000BB45BUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxaTUAS"
+        },
+        "CreatedDate": "2026-02-17T20:02:53.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "5d511b7f-5c88-32f9-c251-12829dd4e7b1",
+        "dfsle__SourceId__c": "00QgK00000BB2PxUAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxYrUAK"
+        },
+        "CreatedDate": "2026-02-17T20:02:53.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "4943d96e-1119-e6ec-c3a4-edc4fbef0eaf",
+        "dfsle__SourceId__c": "00QgK00000BB2PxUAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxSPUA0"
+        },
+        "CreatedDate": "2026-02-17T19:48:01.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "b9016f27-8c90-4e1b-c574-0d85a173e7c0",
+        "dfsle__SourceId__c": "00QgK00000BB0hBUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxQnUAK"
+        },
+        "CreatedDate": "2026-02-17T19:48:01.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "ea8471dd-779b-bc4f-3ec0-6dde79c958d3",
+        "dfsle__SourceId__c": "00QgK00000BB0hBUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxNZUA0"
+        },
+        "CreatedDate": "2026-02-17T19:45:12.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "9ce09e9d-d3d0-3d4b-48d4-883d288f0f42",
+        "dfsle__SourceId__c": "00QgK00000BB15iUAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxIjUAK"
+        },
+        "CreatedDate": "2026-02-17T19:29:17.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "0d9bbc94-f2fb-9c79-3945-1e0fa4004e70",
+        "dfsle__SourceId__c": "00QgK00000BB03BUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NxH7UAK"
+        },
+        "CreatedDate": "2026-02-17T19:24:14.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "78b6180a-2980-a86b-b6a9-03e6b32dc90b",
+        "dfsle__SourceId__c": "00QgK00000BAyCfUAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nx7RUAS"
+        },
+        "CreatedDate": "2026-02-17T18:59:26.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "8564bd85-6244-1d41-a684-5ba9db70d566",
+        "dfsle__SourceId__c": "00QgK00000BAwh7UAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nww9UAC"
+        },
+        "CreatedDate": "2026-02-17T18:26:15.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "b0598651-fd3d-078e-5305-765a356f1d5e",
+        "dfsle__SourceId__c": "00QgK00000BAt1hUAD",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nwg1UAC"
+        },
+        "CreatedDate": "2026-02-17T17:39:57.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "44e3cb21-e20d-91ee-1768-68a4fb16dd18",
+        "dfsle__SourceId__c": "00QgK00000BAoYHUA1",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NwcnUAC"
+        },
+        "CreatedDate": "2026-02-17T17:26:13.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "ead0450e-4954-5d3d-7f30-546feae91888",
+        "dfsle__SourceId__c": "00QgK00000BAnfRUAT",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NwWLUA0"
+        },
+        "CreatedDate": "2026-02-17T17:16:47.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "af3404e5-3c6b-e6e0-07e0-d0981a831ac6",
+        "dfsle__SourceId__c": "00QgK00000BAmOmUAL",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000NuJFUA0"
+        },
+        "CreatedDate": "2026-02-17T03:39:21.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "814781d4-d1d6-078d-e276-928ca9c3e31a",
+        "dfsle__SourceId__c": "00QgK00000B9D1JUAV",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Nu37UAC"
+        },
+        "CreatedDate": "2026-02-17T03:13:25.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "c54d523e-fff8-b58b-64a5-e8d4ab40f947",
+        "dfsle__SourceId__c": "00QgK00000B9BPJUA3",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      },
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000Ntv3UAC"
+        },
+        "CreatedDate": "2026-02-17T03:01:59.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__Method__c": null,
+        "dfsle__TransactionId__c": "3cb4dd39-573e-ed11-4663-4e880c8b6666",
+        "dfsle__SourceId__c": "00QgK00000B9AkzUAF",
+        "dfsle__EntityId__c": null,
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      }
+    ],
+    "totalSize": 72,
+    "done": true
+  }
+}

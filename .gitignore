@@ -52,3 +52,10 @@ unpackaged/
 *.pem
 *.key
 *.crt
+
+_disabled_flows/**
+_disabled_emailtemplates/**
+
+# local flow backups
+*.localbak_*
+

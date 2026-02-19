@@ -1,0 +1,394 @@
+﻿{
+    "project":  "Salesforce",
+    "root":  "E:\\Salesforce",
+    "generatedAt":  {
+                        "value":  "\/Date(1771452628541)\/",
+                        "DisplayHint":  2,
+                        "DateTime":  "Wednesday, February 18, 2026 2:10:28 PM"
+                    },
+    "scriptVersion":  "tree_snapshot.ps1 v0.4.1 - 2026-02-09",
+    "snapshotId":  "20260218_141028",
+    "tree":  {
+                 "name":  "Salesforce",
+                 "type":  "dir",
+                 "fullPath":  "E:\\Salesforce",
+                 "lastWriteTime":  "\/Date(1771452628540)\/",
+                 "children":  [
+                                  {
+                                      "name":  ".sf",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\.sf",
+                                      "lastWriteTime":  "\/Date(1771451014010)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  "config.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\.sf\\config.json",
+                                                           "lastWriteTime":  "\/Date(1771451014010)\/",
+                                                           "length":  63
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  ".sfdx",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\.sfdx",
+                                      "lastWriteTime":  "\/Date(1771431514528)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  "sfdx-config.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\.sfdx\\sfdx-config.json",
+                                                           "lastWriteTime":  "\/Date(1771451014011)\/",
+                                                           "length":  68
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  "config",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\config",
+                                      "lastWriteTime":  "\/Date(1771306612176)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  "project-scratch-def.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\config\\project-scratch-def.json",
+                                                           "lastWriteTime":  "\/Date(1771306612176)\/",
+                                                           "length":  277
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  "flow_codegen",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\flow_codegen",
+                                      "lastWriteTime":  "\/Date(1771306380115)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  "config.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\flow_codegen\\config.json",
+                                                           "lastWriteTime":  "\/Date(1771306380115)\/",
+                                                           "length":  110
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  "Projects",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\Projects",
+                                      "lastWriteTime":  "\/Date(1771428936758)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  "CRM_Analytics_Project_Guide.md",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\Projects\\CRM_Analytics_Project_Guide.md",
+                                                           "lastWriteTime":  "\/Date(1771429081920)\/",
+                                                           "length":  5615
+                                                       },
+                                                       {
+                                                           "name":  "CRM_Workflow_Project_Guide.md",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\Projects\\CRM_Workflow_Project_Guide.md",
+                                                           "lastWriteTime":  "\/Date(1771438096251)\/",
+                                                           "length":  13083
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  "SalesforceProjectTemp",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp",
+                                      "lastWriteTime":  "\/Date(1771452431825)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  ".sf",
+                                                           "type":  "dir",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\.sf",
+                                                           "lastWriteTime":  "\/Date(1771452431825)\/",
+                                                           "children":  [
+                                                                            {
+                                                                                "name":  "config.json",
+                                                                                "type":  "file",
+                                                                                "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\.sf\\config.json",
+                                                                                "lastWriteTime":  "\/Date(1771452431824)\/",
+                                                                                "length":  63
+                                                                            }
+                                                                        ]
+                                                       },
+                                                       {
+                                                           "name":  ".sfdx",
+                                                           "type":  "dir",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\.sfdx",
+                                                           "lastWriteTime":  "\/Date(1771452431825)\/",
+                                                           "children":  [
+                                                                            {
+                                                                                "name":  "sfdx-config.json",
+                                                                                "type":  "file",
+                                                                                "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\.sfdx\\sfdx-config.json",
+                                                                                "lastWriteTime":  "\/Date(1771452431825)\/",
+                                                                                "length":  68
+                                                                            }
+                                                                        ]
+                                                       },
+                                                       {
+                                                           "name":  "config",
+                                                           "type":  "dir",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\config",
+                                                           "lastWriteTime":  "\/Date(1771452025417)\/",
+                                                           "children":  [
+                                                                            {
+                                                                                "name":  "project-scratch-def.json",
+                                                                                "type":  "file",
+                                                                                "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\config\\project-scratch-def.json",
+                                                                                "lastWriteTime":  "\/Date(1771452025417)\/",
+                                                                                "length":  277
+                                                                            }
+                                                                        ]
+                                                       },
+                                                       {
+                                                           "name":  ".gitignore",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\.gitignore",
+                                                           "lastWriteTime":  "\/Date(1771452025443)\/",
+                                                           "length":  823
+                                                       },
+                                                       {
+                                                           "name":  "dfsle_EnvelopeConfiguration_fields.txt",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\dfsle_EnvelopeConfiguration_fields.txt",
+                                                           "lastWriteTime":  "\/Date(1771452248457)\/",
+                                                           "length":  3993
+                                                       },
+                                                       {
+                                                           "name":  "eslint.config.js",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\eslint.config.js",
+                                                           "lastWriteTime":  "\/Date(1771452025436)\/",
+                                                           "length":  1433
+                                                       },
+                                                       {
+                                                           "name":  "jest.config.js",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\jest.config.js",
+                                                           "lastWriteTime":  "\/Date(1771452025449)\/",
+                                                           "length":  170
+                                                       },
+                                                       {
+                                                           "name":  "package.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\package.json",
+                                                           "lastWriteTime":  "\/Date(1771452025450)\/",
+                                                           "length":  1480
+                                                       },
+                                                       {
+                                                           "name":  "README.md",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\README.md",
+                                                           "lastWriteTime":  "\/Date(1771452025420)\/",
+                                                           "length":  1251
+                                                       },
+                                                       {
+                                                           "name":  "sfdx-project.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\SalesforceProjectTemp\\sfdx-project.json",
+                                                           "lastWriteTime":  "\/Date(1771452025422)\/",
+                                                           "length":  229
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  "specs",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\specs",
+                                      "lastWriteTime":  "\/Date(1771445246599)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  "agentSpec.yaml",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\specs\\agentSpec.yaml",
+                                                           "lastWriteTime":  "\/Date(1771445246599)\/",
+                                                           "length":  632
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  "tmp_md",
+                                      "type":  "dir",
+                                      "fullPath":  "E:\\Salesforce\\tmp_md",
+                                      "lastWriteTime":  "\/Date(1771359584716)\/",
+                                      "children":  [
+                                                       {
+                                                           "name":  "dfsle__EnvelopeConfigurationDocument__c.describe.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\tmp_md\\dfsle__EnvelopeConfigurationDocument__c.describe.json",
+                                                           "lastWriteTime":  "\/Date(1771359622960)\/",
+                                                           "length":  117032
+                                                       },
+                                                       {
+                                                           "name":  "dfsle__EnvelopeConfigurationRecipient__c.describe.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\tmp_md\\dfsle__EnvelopeConfigurationRecipient__c.describe.json",
+                                                           "lastWriteTime":  "\/Date(1771359620411)\/",
+                                                           "length":  186934
+                                                       },
+                                                       {
+                                                           "name":  "dfsle__EnvelopeConfiguration__c.describe.json",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\tmp_md\\dfsle__EnvelopeConfiguration__c.describe.json",
+                                                           "lastWriteTime":  "\/Date(1771359625964)\/",
+                                                           "length":  240440
+                                                       },
+                                                       {
+                                                           "name":  "dfsle__Envelope__c.describe.txt",
+                                                           "type":  "file",
+                                                           "fullPath":  "E:\\Salesforce\\tmp_md\\dfsle__Envelope__c.describe.txt",
+                                                           "lastWriteTime":  "\/Date(1771358064320)\/",
+                                                           "length":  158318
+                                                       }
+                                                   ]
+                                  },
+                                  {
+                                      "name":  ".gitignore",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\.gitignore",
+                                      "lastWriteTime":  "\/Date(1771449460232)\/",
+                                      "length":  851
+                                  },
+                                  {
+                                      "name":  "apexlog_07LgK00000H2jfEUAR.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\apexlog_07LgK00000H2jfEUAR.txt",
+                                      "lastWriteTime":  "\/Date(1771396639443)\/",
+                                      "length":  12168
+                                  },
+                                  {
+                                      "name":  "apexlog_07LgK00000H2o3mUAB.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\apexlog_07LgK00000H2o3mUAB.txt",
+                                      "lastWriteTime":  "\/Date(1771394742605)\/",
+                                      "length":  12275
+                                  },
+                                  {
+                                      "name":  "apexlog_07LgK00000H2pSrUAJ.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\apexlog_07LgK00000H2pSrUAJ.txt",
+                                      "lastWriteTime":  "\/Date(1771394895720)\/",
+                                      "length":  2838
+                                  },
+                                  {
+                                      "name":  "apexlog_07LgK00000H2SphUAF.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\apexlog_07LgK00000H2SphUAF.txt",
+                                      "lastWriteTime":  "\/Date(1771394895362)\/",
+                                      "length":  1340
+                                  },
+                                  {
+                                      "name":  "apexlog_07LgK00000H4BMVUA3.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\apexlog_07LgK00000H4BMVUA3.txt",
+                                      "lastWriteTime":  "\/Date(1771426723020)\/",
+                                      "length":  11968
+                                  },
+                                  {
+                                      "name":  "apexlog_07LgK00000H4EvSUAV.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\apexlog_07LgK00000H4EvSUAV.txt",
+                                      "lastWriteTime":  "\/Date(1771426723458)\/",
+                                      "length":  11792
+                                  },
+                                  {
+                                      "name":  "dfsle_envelopestatus_describe.json",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\dfsle_envelopestatus_describe.json",
+                                      "lastWriteTime":  "\/Date(1771439535774)\/",
+                                      "length":  80087
+                                  },
+                                  {
+                                      "name":  "dfsle_EnvelopeStatus_fields.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\dfsle_EnvelopeStatus_fields.txt",
+                                      "lastWriteTime":  "\/Date(1771447311066)\/",
+                                      "length":  2057
+                                  },
+                                  {
+                                      "name":  "dfsle_envelope_describe.json",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\dfsle_envelope_describe.json",
+                                      "lastWriteTime":  "\/Date(1771437931218)\/",
+                                      "length":  79161
+                                  },
+                                  {
+                                      "name":  "dfsle_logs.json",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\dfsle_logs.json",
+                                      "lastWriteTime":  "\/Date(1771450324763)\/",
+                                      "length":  50582
+                                  },
+                                  {
+                                      "name":  "dfsle_Log_fields.txt",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\dfsle_Log_fields.txt",
+                                      "lastWriteTime":  "\/Date(1771449906051)\/",
+                                      "length":  1241
+                                  },
+                                  {
+                                      "name":  "eslint.config.js",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\eslint.config.js",
+                                      "lastWriteTime":  "\/Date(1771306612192)\/",
+                                      "length":  1433
+                                  },
+                                  {
+                                      "name":  "jest.config.js",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\jest.config.js",
+                                      "lastWriteTime":  "\/Date(1771306612201)\/",
+                                      "length":  170
+                                  },
+                                  {
+                                      "name":  "lead_describe.json",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\lead_describe.json",
+                                      "lastWriteTime":  "\/Date(1771439356897)\/",
+                                      "length":  278345
+                                  },
+                                  {
+                                      "name":  "package.json",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\package.json",
+                                      "lastWriteTime":  "\/Date(1771306612203)\/",
+                                      "length":  1480
+                                  },
+                                  {
+                                      "name":  "README.md",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\README.md",
+                                      "lastWriteTime":  "\/Date(1771384135693)\/",
+                                      "length":  11942
+                                  },
+                                  {
+                                      "name":  "sfdx-project.json",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\sfdx-project.json",
+                                      "lastWriteTime":  "\/Date(1771430754605)\/",
+                                      "length":  222
+                                  },
+                                  {
+                                      "name":  "test_convert_lead_and_trigger_flow.ps1",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\test_convert_lead_and_trigger_flow.ps1",
+                                      "lastWriteTime":  "\/Date(1771393723591)\/",
+                                      "length":  12952
+                                  },
+                                  {
+                                      "name":  "test_lead_flow.ps1",
+                                      "type":  "file",
+                                      "fullPath":  "E:\\Salesforce\\test_lead_flow.ps1",
+                                      "lastWriteTime":  "\/Date(1771380087414)\/",
+                                      "length":  450
+                                  }
+                              ]
+             }
+}

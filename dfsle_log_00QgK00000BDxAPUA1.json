@@ -1,0 +1,21 @@
+﻿{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "dfsle__Log__c",
+          "url": "/services/data/v65.0/sobjects/dfsle__Log__c/a0MgK000000O4P3UAK"
+        },
+        "CreatedDate": "2026-02-19T03:02:46.000+0000",
+        "dfsle__Severity__c": "ERROR",
+        "dfsle__Class__c": "Envelope sending via flow/batch",
+        "dfsle__TransactionId__c": "951cef11-a0ac-f0fa-2375-97c22dfb8989",
+        "dfsle__Message__c": "Envelope Sending failed - The Envelope is not Complete. A Complete Envelope Requires Documents, Recipients, Tabs, and a Subject Line."
+      }
+    ],
+    "totalSize": 1,
+    "done": true
+  },
+  "warnings": []
+}

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- v0.1.1 | 2026-02-18 -->
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+  <fields>
+    <fullName>Qualified_At__c</fullName>
+    <label>Qualified At</label>
+    <type>DateTime</type>
+    <description>Timestamp when Lead is marked Qualified via DocuSign completion ingest.</description>
+    <required>false</required>
+  </fields>
+</CustomObject>

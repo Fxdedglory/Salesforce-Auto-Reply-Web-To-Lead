@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- v0.2.5 | 2026-02-18 | SF_Notify_Milestone: Decision uses defaultConnectorLabel (org-compatible) -->
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+  <apiVersion>65.0</apiVersion>
+  <label>SF_Notify_Milestone</label>
+  <processType>AutolaunchedFlow</processType>
+  <status>Draft</status>
+
+  <variables>
+    <name>RecordId</name>
+    <dataType>String</dataType>
+    <isCollection>false</isCollection>
+    <isInput>true</isInput>
+    <isOutput>false</isOutput>
+  </variables>
+  <variables>
+    <name>PipelineKey</name>
+    <dataType>String</dataType>
+    <isCollection>false</isCollection>
+    <isInput>true</isInput>
+    <isOutput>false</isOutput>
+  </variables>
+  <variables>
+    <name>MilestoneKey</name>
+    <dataType>String</dataType>
+    <isCollection>false</isCollection>
+    <isInput>true</isInput>
+    <isOutput>false</isOutput>
+  </variables>
+
+  <decisions>
+    <name>Dec_Milestone</name>
+    <label>Milestone Router</label>
+    <locationX>300</locationX>
+    <locationY>80</locationY>
+
+    <rules>
+      <name>R_APPROVAL_PENDING</name>
+      <conditionLogic>1</conditionLogic>
+      <conditions>
+        <leftValueReference>MilestoneKey</leftValueReference>
+        <operator>EqualTo</operator>
+        <rightValue><stringValue>MILESTONE_APPROVAL_PENDING</stringValue></rightValue>
+      </conditions>
+      <connector><targetReference>Log_Milestone</targetReference></connector>
+    </rules>
+
+    <rules>
+      <name>R_APPROVAL_REJECTED</name>
+      <conditionLogic>1</conditionLogic>
+      <conditions>
+        <leftValueReference>MilestoneKey</leftValueReference>
+        <operator>EqualTo</operator>
+        <rightValue><stringValue>MILESTONE_APPROVAL_REJECTED</stringValue></rightValue>
+      </conditions>
+      <connector><targetReference>Log_Milestone</targetReference></connector>
+    </rules>
+
+    <rules>
+      <name>R_PROPOSAL_SENT</name>
+      <conditionLogic>1</conditionLogic>
+      <conditions>
+        <leftValueReference>MilestoneKey</leftValueReference>
+        <operator>EqualTo</operator>
+        <rightValue><stringValue>MILESTONE_PROPOSAL_SENT</stringValue></rightValue>
+      </conditions>
+      <connector><targetReference>Log_Milestone</targetReference></connector>
+    </rules>
+
+    <rules>
+      <name>R_CONTRACT_SENT</name>
+      <conditionLogic>1</conditionLogic>
+      <conditions>
+        <leftValueReference>MilestoneKey</leftValueReference>
+        <operator>EqualTo</operator>
+        <rightValue><stringValue>MILESTONE_CONTRACT_SENT</stringValue></rightValue>
+      </conditions>
+      <connector><targetReference>Log_Milestone</targetReference></connector>
+    </rules>
+
+    <rules>
+      <name>R_CONTRACT_SIGNED</name>
+      <conditionLogic>1</conditionLogic>
+      <conditions>
+        <leftValueReference>MilestoneKey</leftValueReference>
+        <operator>EqualTo</operator>
+        <rightValue><stringValue>MILESTONE_CONTRACT_SIGNED</stringValue></rightValue>
+      </conditions>
+      <connector><targetReference>Log_Milestone</targetReference></connector>
+    </rules>
+
+    <defaultConnector>
+      <targetReference>Log_Unknown</targetReference>
+    </defaultConnector>
+    <defaultConnectorLabel>Unknown Milestone</defaultConnectorLabel>
+  </decisions>
+
+  <subflows>
+    <name>Log_Milestone</name>
+    <label>Log Milestone</label>
+    <locationX>560</locationX>
+    <locationY>80</locationY>
+    <flowName>SF_Log_Run</flowName>
+    <inputAssignments><name>RecordId</name><value><elementReference>RecordId</elementReference></value></inputAssignments>
+    <inputAssignments><name>PipelineKey</name><value><elementReference>PipelineKey</elementReference></value></inputAssignments>
+    <inputAssignments><name>MilestoneKey</name><value><elementReference>MilestoneKey</elementReference></value></inputAssignments>
+    <inputAssignments><name>Severity</name><value><stringValue>INFO</stringValue></value></inputAssignments>
+    <inputAssignments><name>Message</name><value><stringValue>Milestone reached (router only). Wire downstream actions in UI.</stringValue></value></inputAssignments>
+  </subflows>
+
+  <subflows>
+    <name>Log_Unknown</name>
+    <label>Log Unknown</label>
+    <locationX>560</locationX>
+    <locationY>180</locationY>
+    <flowName>SF_Log_Run</flowName>
+    <inputAssignments><name>RecordId</name><value><elementReference>RecordId</elementReference></value></inputAssignments>
+    <inputAssignments><name>PipelineKey</name><value><elementReference>PipelineKey</elementReference></value></inputAssignments>
+    <inputAssignments><name>MilestoneKey</name><value><elementReference>MilestoneKey</elementReference></value></inputAssignments>
+    <inputAssignments><name>Severity</name><value><stringValue>WARN</stringValue></value></inputAssignments>
+    <inputAssignments><name>Message</name><value><stringValue>Unknown MilestoneKey. No action taken.</stringValue></value></inputAssignments>
+  </subflows>
+
+  <start>
+    <locationX>80</locationX>
+    <locationY>80</locationY>
+    <connector><targetReference>Dec_Milestone</targetReference></connector>
+  </start>
+</Flow>

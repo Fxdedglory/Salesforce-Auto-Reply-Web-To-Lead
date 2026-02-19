@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+
+  <fields>
+    <fullName>DocuSign_Email_Sent__c</fullName>
+    <label>DocuSign Email Sent</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+  </fields>
+
+  <fields>
+    <fullName>DocuSign_Approved__c</fullName>
+    <label>DocuSign Approved</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+  </fields>
+
+  <fields>
+    <fullName>CRM_Core_Processed__c</fullName>
+    <label>CRM Core Processed</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+  </fields>
+
+  <fields>
+    <fullName>Company_Form_Completed__c</fullName>
+    <label>Company Form Completed</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+  </fields>
+
+  <fields>
+    <fullName>Contact_Form_Completed__c</fullName>
+    <label>Contact Form Completed</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+  </fields>
+
+  <fields>
+    <fullName>Qualification_Status__c</fullName>
+    <label>Qualification Status</label>
+    <type>Picklist</type>
+    <valueSet>
+      <restricted>true</restricted>
+      <valueSetDefinition>
+        <sorted>false</sorted>
+        <value><fullName>New</fullName><default>true</default><label>New</label></value>
+        <value><fullName>Working</fullName><default>false</default><label>Working</label></value>
+        <value><fullName>Qualified</fullName><default>false</default><label>Qualified</label></value>
+        <value><fullName>Unqualified</fullName><default>false</default><label>Unqualified</label></value>
+      </valueSetDefinition>
+    </valueSet>
+  </fields>
+
+</CustomObject>

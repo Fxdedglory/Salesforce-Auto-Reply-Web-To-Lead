@@ -1,0 +1,51 @@
+﻿
+name                               label                                type     
+----                               -----                                ----     
+CreatedById                        Created By ID                        reference
+CreatedDate                        Created Date                         datetime 
+dfsle__Action__c                   Action                               picklist 
+dfsle__Active__c                   Active                               boolean  
+dfsle__AddSourceDocuments__c       Add Salesforce source documents      boolean  
+dfsle__AddSourceRecipients__c      Add Salesforce source recipients     boolean  
+dfsle__CustomFields__c             Custom fields                        textarea 
+dfsle__DFSTemplateId__c            DFS Template ID                      string   
+dfsle__DocuSignId__c               DocuSign template ID                 string   
+dfsle__EmailMessage__c             Email message                        textarea 
+dfsle__EmailSubject__c             Email subject                        string   
+dfsle__ExpireAfterDays__c          Expire/void Envelope in N day(s)     double   
+dfsle__Expires__c                  Expire/void Envelope                 boolean  
+dfsle__ExpireWarnDays__c           Warn of expiration in N day(s) prior double   
+dfsle__IsDraft__c                  Is draft                             boolean  
+dfsle__IsQuickSend__c              Is Quick Send                        boolean  
+dfsle__MergeFields__c              Merge fields                         textarea 
+dfsle__Notifications__c            Notifications                        textarea 
+dfsle__ObjectType__c               Object type                          textarea 
+dfsle__Options__c                  Options                              textarea 
+dfsle__Remind__c                   Remind signers via email             boolean  
+dfsle__RemindAfterDays__c          Send reminder in N day(s)            double   
+dfsle__RemindFrequencyDays__c      Remind every N day(s) until complete double   
+dfsle__Sender__c                   Sender                               reference
+dfsle__SenderDocuSignUserName__c   Sender DocuSign UserName             string   
+dfsle__SenderPermissions__c        Sender permissions                   textarea 
+dfsle__SenderSalesforceUserName__c Sender Salesforce UserName           string   
+dfsle__SendingExperience__c        Sending Experience                   picklist 
+dfsle__ShowChatterSettings__c      Show Chatter settings                boolean  
+dfsle__ShowEmailMessage__c         Show email message                   boolean  
+dfsle__ShowEmailSubject__c         Show email subject                   boolean  
+dfsle__ShowRemindExpire__c         Show remind and expire settings      boolean  
+dfsle__ShowSendButton__c           Show send button                     boolean  
+dfsle__ShowTagButton__c            Show tag button                      boolean  
+dfsle__SourceObject__c             Source object                        string   
+dfsle__TemplateType__c             Template Type                        picklist 
+Id                                 Record ID                            id       
+IsDeleted                          Deleted                              boolean  
+LastActivityDate                   Last Activity Date                   date     
+LastModifiedById                   Last Modified By ID                  reference
+LastModifiedDate                   Last Modified Date                   datetime 
+LastReferencedDate                 Last Referenced Date                 datetime 
+LastViewedDate                     Last Viewed Date                     datetime 
+Name                               Name                                 string   
+OwnerId                            Owner ID                             reference
+SystemModstamp                     System Modstamp                      datetime 
+
+

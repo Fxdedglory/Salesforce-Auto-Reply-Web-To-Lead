@@ -1,0 +1,25 @@
+﻿
+name                    label                type     
+----                    -----                ----     
+CreatedById             Created By ID        reference
+CreatedDate             Created Date         datetime 
+dfsle__Class__c         Class                string   
+dfsle__EntityId__c      DocuSign entity ID   string   
+dfsle__Message__c       Message              textarea 
+dfsle__Method__c        Method               string   
+dfsle__Severity__c      Severity             picklist 
+dfsle__SourceId__c      Salesforce source ID string   
+dfsle__TransactionId__c Transaction ID       string   
+dfsle__Version__c       Version              string   
+Id                      Record ID            id       
+IsDeleted               Deleted              boolean  
+LastActivityDate        Last Activity Date   date     
+LastModifiedById        Last Modified By ID  reference
+LastModifiedDate        Last Modified Date   datetime 
+LastReferencedDate      Last Referenced Date datetime 
+LastViewedDate          Last Viewed Date     datetime 
+Name                    Docusign Log         string   
+OwnerId                 Owner ID             reference
+SystemModstamp          System Modstamp      datetime 
+
+

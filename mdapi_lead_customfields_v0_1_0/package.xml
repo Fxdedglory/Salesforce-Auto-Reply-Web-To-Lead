@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <types>
+    <members>Lead.DocuSign_Email_Sent__c</members>
+    <members>Lead.DocuSign_Approved__c</members>
+    <members>Lead.Qualification_Status__c</members>
+    <members>Lead.CRM_Core_Processed__c</members>
+    <members>Lead.Company_Form_Completed__c</members>
+    <members>Lead.Contact_Form_Completed__c</members>
+    <name>CustomField</name>
+  </types>
+  <version>65.0</version>
+</Package>

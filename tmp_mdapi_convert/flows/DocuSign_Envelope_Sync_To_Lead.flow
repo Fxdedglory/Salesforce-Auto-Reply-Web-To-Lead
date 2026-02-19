@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Completed_Has_Opportunity</name>
+        <label>Completed - Create Opp Task?</label>
+        <locationX>50</locationX>
+        <locationY>460</locationY>
+        <defaultConnector>
+            <targetReference>Create_Task_Completed_Lead</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Lead Task (Not Converted or No Opp)</defaultConnectorLabel>
+        <rules>
+            <name>Opp_And_Converted_Completed</name>
+            <conditionLogic>1 AND 2</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.dfsle__Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Completed.IsConverted</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Completed_Opp</targetReference>
+            </connector>
+            <label>Opp present AND Lead converted</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Declined_Has_Opportunity</name>
+        <label>Declined - Create Opp Task?</label>
+        <locationX>260</locationX>
+        <locationY>460</locationY>
+        <defaultConnector>
+            <targetReference>Create_Task_Declined_Lead</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Lead Task (Not Converted or No Opp)</defaultConnectorLabel>
+        <rules>
+            <name>Opp_And_Converted_Declined</name>
+            <conditionLogic>1 AND 2</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.dfsle__Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Declined.IsConverted</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Declined_Opp</targetReference>
+            </connector>
+            <label>Opp present AND Lead converted</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Status_Router</name>
+        <label>Status Router</label>
+        <locationX>50</locationX>
+        <locationY>140</locationY>
+        <defaultConnector>
+            <targetReference>Log_Default_Task</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Is_Completed</name>
+            <conditionLogic>1</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.dfsle__Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Lead_Completed</targetReference>
+            </connector>
+            <label>Status = Completed</label>
+        </rules>
+        <rules>
+            <name>Is_Declined</name>
+            <conditionLogic>1</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.dfsle__Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Declined</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Lead_Declined</targetReference>
+            </connector>
+            <label>Status = Declined</label>
+        </rules>
+        <rules>
+            <name>Is_Voided</name>
+            <conditionLogic>1</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.dfsle__Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Voided</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Lead_Voided</targetReference>
+            </connector>
+            <label>Status = Voided</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Voided_Has_Opportunity</name>
+        <label>Voided - Create Opp Task?</label>
+        <locationX>470</locationX>
+        <locationY>460</locationY>
+        <defaultConnector>
+            <targetReference>Create_Task_Voided_Lead</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Lead Task (Not Converted or No Opp)</defaultConnectorLabel>
+        <rules>
+            <name>Opp_And_Converted_Voided</name>
+            <conditionLogic>1 AND 2</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.dfsle__Opportunity__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_Lead_Voided.IsConverted</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Task_Voided_Opp</targetReference>
+            </connector>
+            <label>Opp present AND Lead converted</label>
+        </rules>
+    </decisions>
+    <description>Demo (No-Code / Flow):
+        - Trigger: dfsle__EnvelopeStatus__c updated (After Save)
+        - If Status becomes Completed/Declined/Voided AND dfsle__Lead__c is populated:
+            - Update Lead.Status using org-native Lead Status values
+            - Create follow-up Task (realistic CRM rules):
+                - If Lead NOT converted:
+                    - Task.WhoId = Lead
+                    - Task.WhatId = null   (Salesforce rule: cannot set WhatId w/ Lead WhoId)
+                - If Lead IS converted and Opportunity present:
+                    - Task.WhoId = Lead.ConvertedContactId
+                    - Task.WhatId = dfsle__Opportunity__c
+
+        Debugging:
+        - Default Decision path creates a debug Task (Lead-only; no WhatId)
+        - Fault connector creates a fault Task (Lead-only; no WhatId)
+
+        Confirmed objects/fields in this org:
+        - dfsle__EnvelopeStatus__c
+          - dfsle__Status__c
+          - dfsle__Lead__c
+          - dfsle__DocuSignId__c
+          - dfsle__Opportunity__c
+
+        Lead.Status values used (per org describe):
+        - Completed  -&gt; Closed - Converted
+        - Declined   -&gt; Closed - Not Converted
+        - Voided     -&gt; Working - Contacted</description>
+    <label>DocuSign Envelope Sync To Lead</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Task_Completed_Lead</name>
+        <label>Create Follow-up Task - Completed (Lead)</label>
+        <locationX>50</locationX>
+        <locationY>610</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>[BRANCH=LEAD] DocuSign envelope completed. Review signed docs and move lead forward. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[DocuSign] Agreement Completed - Next Steps</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Completed_Opp</name>
+        <label>Create Follow-up Task - Completed (Opportunity)</label>
+        <locationX>50</locationX>
+        <locationY>730</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>[BRANCH=OPP] DocuSign envelope completed. Review signed docs and move lead forward. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[DocuSign] Agreement Completed - Next Steps</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.dfsle__Opportunity__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>Get_Lead_Completed.ConvertedContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Declined_Lead</name>
+        <label>Create Follow-up Task - Declined (Lead)</label>
+        <locationX>260</locationX>
+        <locationY>610</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>[BRANCH=LEAD] DocuSign envelope declined. Contact lead to understand objections and attempt recovery. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[DocuSign] Agreement Declined - Follow Up</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Declined_Opp</name>
+        <label>Create Follow-up Task - Declined (Opportunity)</label>
+        <locationX>260</locationX>
+        <locationY>730</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>[BRANCH=OPP] DocuSign envelope declined. Contact lead to understand objections and attempt recovery. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[DocuSign] Agreement Declined - Follow Up</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.dfsle__Opportunity__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>Get_Lead_Declined.ConvertedContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Voided_Lead</name>
+        <label>Create Follow-up Task - Voided (Lead)</label>
+        <locationX>470</locationX>
+        <locationY>610</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>[BRANCH=LEAD] DocuSign envelope voided. Confirm why it was voided and re-send if appropriate. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[DocuSign] Envelope Voided - Re-engage</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Task_Voided_Opp</name>
+        <label>Create Follow-up Task - Voided (Opportunity)</label>
+        <locationX>470</locationX>
+        <locationY>730</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>[BRANCH=OPP] DocuSign envelope voided. Confirm why it was voided and re-send if appropriate. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[DocuSign] Envelope Voided - Re-engage</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>$Record.dfsle__Opportunity__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>Get_Lead_Voided.ConvertedContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Default_Task</name>
+        <label>DEBUG: Unhandled Status</label>
+        <locationX>50</locationX>
+        <locationY>520</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>No matching decision outcome. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[Flow Debug] Unhandled Envelope Status</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault_Task</name>
+        <label>DEBUG: Flow Fault Task</label>
+        <locationX>260</locationX>
+        <locationY>520</locationY>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Flow fault while updating Lead or creating follow-up Task. DocuSignId={!$Record.dfsle__DocuSignId__c} Status={!$Record.dfsle__Status__c} Lead={!$Record.dfsle__Lead__c} Opp={!$Record.dfsle__Opportunity__c}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>[Flow Fault] DocuSign Status Sync</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhoId</field>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Lead_Completed</name>
+        <label>Get Lead (Completed)</label>
+        <locationX>50</locationX>
+        <locationY>360</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Completed_Has_Opportunity</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Lead_Declined</name>
+        <label>Get Lead (Declined)</label>
+        <locationX>260</locationX>
+        <locationY>360</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Declined_Has_Opportunity</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Lead_Voided</name>
+        <label>Get Lead (Voided)</label>
+        <locationX>470</locationX>
+        <locationY>360</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Voided_Has_Opportunity</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Lead</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Lead_Completed</name>
+        <label>Update Lead - Completed</label>
+        <locationX>50</locationX>
+        <locationY>280</locationY>
+        <connector>
+            <targetReference>Get_Lead_Completed</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed - Converted</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Lead_Declined</name>
+        <label>Update Lead - Declined</label>
+        <locationX>260</locationX>
+        <locationY>280</locationY>
+        <connector>
+            <targetReference>Get_Lead_Declined</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed - Not Converted</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Lead_Voided</name>
+        <label>Update Lead - Voided</label>
+        <locationX>470</locationX>
+        <locationY>280</locationY>
+        <connector>
+            <targetReference>Get_Lead_Voided</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Fault_Task</targetReference>
+        </faultConnector>
+        <filterLogic>1</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.dfsle__Lead__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Working - Contacted</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Lead</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Status_Router</targetReference>
+        </connector>
+        <filterLogic>((1 OR 2 OR 3) AND 4)</filterLogic>
+        <filters>
+            <field>dfsle__Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Completed</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>dfsle__Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Declined</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>dfsle__Status__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Voided</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>dfsle__Lead__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>dfsle__EnvelopeStatus__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

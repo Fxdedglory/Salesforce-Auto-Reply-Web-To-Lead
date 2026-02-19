@@ -1,0 +1,72 @@
+﻿[1m65.0 APEX_CODE,FINEST;APEX_PROFILING,FINEST;CALLOUT,FINEST;DATA_ACCESS,INFO;DB,FINEST;NBA,INFO;SYSTEM,FINEST;VALIDATION,FINEST;VISUALFORCE,FINER;WAVE,INFO;WORKFLOW,FINEST[22m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m0[39m ([94m200567[39m)[1m[32m|USER_INFO|[39m[22m[EXTERNAL]|005gK000021e3QR|[94msellwood.timm.b2526c60dcf4[39m@[94magentforce.com[39m|(GMT-[94m08[39m:[94m00[39m) Pacific Standard Time (America/Los_Angeles)|GMT-[94m08[39m:[94m00[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m0[39m ([94m298822[39m)|EXECUTION_STARTED
+[94m19[39m:[94m53[39m:[94m11[39m.[94m0[39m ([94m323337[39m)|CODE_UNIT_STARTED|[EXTERNAL]|Flow:Opportunity
+[94m19[39m:[94m53[39m:[94m11[39m.[94m34[39m ([94m34897947[39m)|FLOW_CREATE_INTERVIEW_BEGIN|00DgK00000JpT1w|300gK00000fM3av|301gK00000elwy0
+[94m19[39m:[94m53[39m:[94m11[39m.[94m34[39m ([94m35210740[39m)|FLOW_CREATE_INTERVIEW_END|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|Opp CRM Router (After Save)
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37392265[39m)|FLOW_START_INTERVIEWS_BEGIN|[94m1[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37576339[39m)|FLOW_START_INTERVIEW_BEGIN|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|Opp CRM Router (After Save)
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37655753[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|SOQL queries: [94m0[39m out of [94m100[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37738620[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|SOQL query rows: [94m0[39m out of [94m50000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37753929[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|SOSL queries: [94m0[39m out of [94m20[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37796219[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|DML statements: [94m0[39m out of [94m150[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37833912[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|DML rows: [94m0[39m out of [94m10000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37843790[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|CPU time in ms: [94m2[39m out of [94m15000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37885099[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|Heap size in bytes: [94m0[39m out of [94m6000000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37895478[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|Callouts: [94m0[39m out of [94m100[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37905623[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|Email invocations: [94m0[39m out of [94m10[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37914949[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|Future calls: [94m0[39m out of [94m50[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37926998[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|Jobs in queue: [94m0[39m out of [94m50[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m37936166[39m)|FLOW_START_INTERVIEW_LIMIT_USAGE|Push notifications: [94m0[39m out of [94m10[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m39578279[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|$Record|{Id=006gK00000C8a2rQAB, IsDeleted=[94mfalse[39m, AccountId=001gK00000ejgKDQAY, IsPrivate=[94mfalse[39m, Name=FlowTest Opp, Description=[94mnull[39m, StageName=Prospecting, Amount=[94mnull[39m, Probability=[94m10[39m.[94m0[39m, ExpectedRevenue=[94mnull[39m, TotalOpportunityQuantity=[94mnull[39m, CloseDate=[94m2026[39m-[94m12[39m-[94m31[39m [94m00[39m:[94m00[39m:[94m00[39m, Type=[94mnull[39m, NextStep=[94mnull[39m, LeadSource=[94mnull[39m, IsClosed=[94mfalse[39m, IsWon=[94mfalse[39m, ForecastCategory=Pipeline, ForecastCategoryName=Pipeline, CampaignId=[94mnull[39m, HasOpportunityLineItem=[94mfalse[39m, Pricebook2Id=[94mnull[39m, OwnerId=005gK000021e3QRQAY, CreatedDate=[94m2026[39m-[94m02[39m-[94m18[39m [94m20[39m:[94m10[39m:[94m28[39m, CreatedById=005gK000021e3QRQAY, LastModifiedDate=[94m2026[39m-[94m02[39m-[94m19[39m [94m03[39m:[94m53[39m:[94m11[39m, LastModifiedById=005gK000021e3QRQAY, SystemModstamp=[94m2026[39m-[94m02[39m-[94m19[39m [94m03[39m:[94m53[39m:[94m11[39m, LastActivityDate=[94mnull[39m, PushCount=[94mnull[39m, LastStageChangeDate=[94m2026[39m-[94m02[39m-[94m19[39m [94m03[39m:[94m53[39m:[94m11[39m, FiscalYear=[94mnull[39m, FiscalQuarter=[94mnull[39m, ContactId=[94mnull[39m, LastViewedDate=[94mnull[39m, LastReferencedDate=[94mnull[39m, PartnerAccountId=[94mnull[39m, ContractId=[94mnull[39m, HasOpenActivity=[94mfalse[39m, HasOverdueTask=[94mfalse[39m, IqScore=[94mnull[39m, LastAmountChangedHistoryId=[94mnull[39m, LastCloseDateChangedHistoryId=[94mnull[39m, DeliveryInstallationStatus__c=[94mnull[39m, TrackingNumber__c=[94mnull[39m, OrderNumber__c=[94mnull[39m, CurrentGenerators__c=[94mnull[39m, MainCompetitors__c=[94mnull[39m}
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m39937374[39m)|FLOW_ELEMENT_BEGIN|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|FlowSubflow|SF_Log_Start
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m39999911[39m)|FLOW_ELEMENT_DEFERRED|FlowSubflow|SF_Log_Start
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m40083541[39m)|FLOW_ELEMENT_LIMIT_USAGE|[94m2[39m ms CPU time, total [94m4[39m out of [94m15000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m40109461[39m)|FLOW_ELEMENT_END|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|FlowSubflow|SF_Log_Start
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m40224908[39m)|FLOW_START_INTERVIEW_END|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|Opp CRM Router (After Save)
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m40506053[39m)|FLOW_BULK_ELEMENT_BEGIN|FlowSubflow|SF_Log_Start
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m47958145[39m)|FLOW_SUBFLOW_DETAIL|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|SF_Log_Run|300gK00000fLPev|301gK00000ekwTQ
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48043629[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|Severity|[1m[36mDEBUG[39m[22m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48053170[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|RecordId|006gK00000C8a2rQAB
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48059507[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|PipelineKey|OPP_CRM_V1
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48064505[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|Message|Opp_CRM_Router_AfterSave fired.
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48069615[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|MilestoneKey|MILESTONE_ROUTER_FIRED
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48230130[39m)|FLOW_BULK_ELEMENT_LIMIT_USAGE|[94m1[39m ms CPU time, total [94m5[39m out of [94m15000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48258341[39m)|FLOW_BULK_ELEMENT_END|FlowSubflow|SF_Log_Start|[94m0[39m|[94m7[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48326785[39m)|FLOW_ELEMENT_BEGIN|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|FlowRecordCreate|Create_Log_Task
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48350937[39m)|FLOW_ELEMENT_DEFERRED|FlowRecordCreate|Create_Log_Task
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48380510[39m)|FLOW_ELEMENT_LIMIT_USAGE|[94m1[39m ms CPU time, total [94m6[39m out of [94m15000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48394425[39m)|FLOW_ELEMENT_END|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|FlowRecordCreate|Create_Log_Task
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48463574[39m)|FLOW_BULK_ELEMENT_BEGIN|FlowRecordCreate|Create_Log_Task
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m48819655[39m)|LIMIT_USAGE|[EXTERNAL]|FIELDSETS_DESCRIBES|[94m1[39m|[94m100[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m50058979[39m)|FLOW_BULK_ELEMENT_DETAIL|FlowRecordCreate|Create_Log_Task|[94m1[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m50087661[39m)|LIMIT_USAGE|[EXTERNAL]|DML|[94m1[39m|[94m150[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m50097759[39m)|LIMIT_USAGE|[EXTERNAL]|DML_ROWS|[94m1[39m|[94m10000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129192566[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|Create_Log_Task|[94mtrue[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129437683[39m)|FLOW_BULK_ELEMENT_LIMIT_USAGE|[94m1[39m DML statements, total [94m1[39m out of [94m150[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129453363[39m)|FLOW_BULK_ELEMENT_LIMIT_USAGE|[94m1[39m DML rows, total [94m1[39m out of [94m10000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129462210[39m)|FLOW_BULK_ELEMENT_LIMIT_USAGE|[94m16[39m ms CPU time, total [94m22[39m out of [94m15000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129495483[39m)|FLOW_BULK_ELEMENT_END|FlowRecordCreate|Create_Log_Task|[94m1[39m|[94m80[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129720533[39m)|FLOW_ELEMENT_BEGIN|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|FlowSubflow|Call_Guardrail
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129752231[39m)|FLOW_ELEMENT_DEFERRED|FlowSubflow|Call_Guardrail
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129803746[39m)|FLOW_ELEMENT_END|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|FlowSubflow|Call_Guardrail
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m129878753[39m)|FLOW_BULK_ELEMENT_BEGIN|FlowSubflow|Call_Guardrail
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m133817960[39m)|FLOW_SUBFLOW_DETAIL|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|Opp_Reapproval_Guardrail|300gK00000fLPew|301gK00000em3LQ
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m133905220[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|PipelineKey|OPP_CRM_V1
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m133914428[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|RecordId|006gK00000C8a2rQAB
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m134069215[39m)|FLOW_BULK_ELEMENT_LIMIT_USAGE|[94m1[39m ms CPU time, total [94m23[39m out of [94m15000[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m134099078[39m)|FLOW_BULK_ELEMENT_END|FlowSubflow|Call_Guardrail|[94m0[39m|[94m4[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m134322180[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|[94merror.errorId[39m|
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m134333782[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|[94merror.message[39m|The [1m[31m"Get_Opp"[39m[22m element in your flow has validation errors.
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m134341029[39m)|FLOW_VALUE_ASSIGNMENT|1321b92f33f600f9c2fd2d54bd5319c73aa2345-66d9|[94merror.type[39m|FLOW_INTERVIEW_HANDLED_ERROR
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m134727037[39m)|FLOW_ELEMENT_ERROR|The [1m[31m"Get_Opp"[39m[22m element in your flow has validation errors.|FlowRecordLookup|Get_Opp
+[94m19[39m:[94m53[39m:[94m11[39m.[94m37[39m ([94m135034021[39m)|FLOW_START_INTERVIEWS_END|[94m1[39m
+[94m19[39m:[94m53[39m:[94m11[39m.[94m0[39m ([94m137158961[39m)|CODE_UNIT_FINISHED|Flow:Opportunity
+[94m19[39m:[94m53[39m:[94m11[39m.[94m0[39m ([94m137188580[39m)|EXECUTION_FINISHED
+[94m19[39m:[94m53[39m:[94m11[39m.[94m166[39m ([94m166095126[39m)|CUMULATIVE_PROFILING_BEGIN
+[94m19[39m:[94m53[39m:[94m11[39m.[94m166[39m ([94m166095126[39m)|CUMULATIVE_PROFILING|No profiling information for SOQL operations
+[94m19[39m:[94m53[39m:[94m11[39m.[94m166[39m ([94m166095126[39m)|CUMULATIVE_PROFILING|No profiling information for SOSL operations
+[94m19[39m:[94m53[39m:[94m11[39m.[94m166[39m ([94m166095126[39m)|CUMULATIVE_PROFILING|No profiling information for DML operations
+[94m19[39m:[94m53[39m:[94m11[39m.[94m166[39m ([94m166095126[39m)|CUMULATIVE_PROFILING|No profiling information for method invocations
+[94m19[39m:[94m53[39m:[94m11[39m.[94m166[39m ([94m166095126[39m)|CUMULATIVE_PROFILING_END
+

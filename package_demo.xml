@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <types>
+    <members>DocuSign_Envelope_Sync_To_Lead</members>
+    <name>Flow</name>
+  </types>
+
+  <types>
+    <members>Docusign_Template_Asset__c</members>
+    <name>CustomObject</name>
+  </types>
+
+  <types>
+    <members>Docusign_Template_Asset__c.Active__c</members>
+    <members>Docusign_Template_Asset__c.ResumeContentDocumentId__c</members>
+    <members>Docusign_Template_Asset__c.StampedApprovalContentDocumentId__c</members>
+    <members>Lead.DocuSign_Email_Sent__c</members>
+    <name>CustomField</name>
+  </types>
+
+  <types>
+    <members>SendEmailWithFileAttachments</members>
+    <name>ApexClass</name>
+  </types>
+
+  <version>65.0</version>
+</Package>
