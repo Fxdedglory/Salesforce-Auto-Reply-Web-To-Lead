@@ -59,3 +59,41 @@ _disabled_emailtemplates/**
 # local flow backups
 *.localbak_*
 
+# --- local backups / patch artifacts ---
+*.bak
+*.bak*
+*.localbak_*
+
+# --- archives / disabled folders ---
+_archive*/
+_archive_baks_*/
+_disabled_*/
+
+# --- temp / scratch ---
+tmp/
+tmp_*/
+tmp_mdapi_*/
+mdapi_tmp*/
+SalesforceProjectTemp/
+Projects/
+
+# --- CLI & debug outputs ---
+apexlog_*.txt
+*_describe.json
+*_describe.txt
+*_fields.txt
+*_logs.json
+log_*.txt
+log_scan_*.txt
+lead_log_scan_*.txt
+
+# --- manifests/packages generated during work ---
+pkg_*.xml
+package_*.xml
+patch_*.json
+New_Lead_Alert_actionCalls.xml
+
+# --- misc ---
+tree/
+manifest/
+specs/
